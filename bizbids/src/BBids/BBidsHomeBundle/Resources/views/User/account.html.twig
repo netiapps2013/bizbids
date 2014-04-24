@@ -1,0 +1,37 @@
+{% extends '::consumer_dashboard.html.twig' %}
+
+{% block pageblock %}
+<div class="container"> 
+<div class="page-title"><h1>My Account Information</h1></div>
+<div class="col-sm-6 vendor-user gray-bg">
+{% for users in user %}
+
+<div class="field-item"><label>Email</label><div class="field-value">: {{ users.email }}</div></div>
+<div class="field-item"><label>Created Date</label><div class="field-value">: {{ users.created|date('Y-m-d h:i:s') }}</div></div>
+<div class="field-item"><label>Updated Date</label><div class="field-value">: {{ users.updated|date('Y-m-d h:i:s') }}</div></div>
+<div class="field-item"><label>Last Access Date</label><div class="field-value">: {{ users.lastaccess|date('Y-m-d h:i:s') }}</div></div>
+
+{% endfor %}
+</div>
+<div class="col-sm-6 vendor-user gray-bg">
+{% for accounts in account %}
+<div class="field-item"><label>Contact Name</label><div class="field-value">: {{ accounts.contactname }}</div></div>
+{% if accounts.bizname is not empty %}
+<div class="field-item"><label>Business/Company name</label><div class="field-value">: {{ accounts.bizname }}</div></div>
+{% endif %}
+<div class="field-item"><label>Mobile</label><div class="field-value">: {{ accounts.smsphone }}</div></div>
+{% if accounts.homephone is not empty %}
+<div class="field-item"><label>Home Phone</label><div class="field-value">: {{ accounts.homephone }}</div></div>
+{% endif %}
+{% if accounts.fax is not empty %}
+<div class="field-item"><label>Fax</label><div class="field-value">: {{ accounts.fax }}</div></div>
+{% endif %}
+{% if accounts.address is not empty %}
+<div class="field-item"><label>Address</label><div class="field-value">: {{ accounts.address }}</div></div>
+{% endif %}
+{% endfor %}
+</div>
+</div>
+{% endblock %}
+
+

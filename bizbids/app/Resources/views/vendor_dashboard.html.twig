@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<head>
+<title>Business BID Administrator</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-control" content="public">
+<link type="text/css" rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
+<link type="text/css" rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+<link type="text/css" rel="stylesheet" href="{{ asset('css/style.css') }}">
+<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="{{ asset('js/bootstrap.js') }}"></script>
+<script src="{{ asset('js/bootstrap.min.js') }}"></script>
+
+{% block jquery %}
+
+{% endblock %}
+
+{% block customcss %}
+
+{% endblock %}
+
+
+</head>
+<body>
+
+{% set uid = app.session.get('uid') %}
+{% set pid = app.session.get('pid') %}
+{% set email = app.session.get('email') %}
+{% set name = app.session.get('name') %}
+
+{% if uid is not null %}
+
+<div class="welcome-message"><div class="container">Welcome, {{ name }} (<a href="{{ path('b_bids_b_bids_logout') }}">Logout</a>)</div></div>
+
+{% endif %}
+
+<div class="main_container">
+	{% block header %}
+	<div class="header container">
+    	<div class="col-md-6">
+		<a href="{{ path('b_bids_b_bids_home_homepage') }}"  >	<img src="{{ asset('img/logo.jpg') }}"> </a>
+        </div>
+        <div class="col-md-6">
+        </div>
+    	</div>
+	{% endblock %}
+	{% block menu %}
+    	<div class="menu_block">
+    	<div class="container">
+        <div class="navbar-header">
+		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
+        		<span class="icon-bar"></span>
+        		<span class="icon-bar"></span>
+            		<span class="icon-bar"></span>
+        	</button> 
+        </div>
+	{% block topmenu %}
+        <div class="collapse navbar-collapse navHeaderCollapse" >
+        
+        	<ul class="nav navbar-nav navbar-left">
+      
+                <li><a href="{{ path('b_bids_b_bids_vendor_enquiries') }}">ENQUIRES</a></li>
+                <li><a href="{{ path('b_bids_b_bids_leads_my') }}">LEADS</a></li>
+                <li><a href="#">ORDERS</a></li>
+                <li><a href="{{ path('b_bids_b_bids_account') }}">MY ACCOUNT</a></li>
+              	
+            </ul>
+        </div>
+	{% endblock %}
+        
+        </div>
+  	</div>
+	{% endblock %}
+    	
+	{% block pageblock %}
+    	<div class="container inner_container">
+		
+    		<h1>Dashboard</h1>
+		{% block dashboard %}
+	
+        	<div class="col-md-6">
+        	<div class="overview_block block">
+            		<h2>Overview</h2>
+                
+            	</div>
+        	</div>
+		{% endblock %}
+
+		{% block statistics %}
+        	<div class="col-md-6  last">
+        	<div class="overview_block block">
+        	    	<h2>Statistics</h2>
+                
+            	</div>
+        	</div>
+		{% endblock %}
+
+		{% block latestorders %}
+        	<div class="col-md-12 mid">
+        	<div class="overview_block block">
+            		<h2>Latest 10 Orders</h2>
+                
+            	</div>
+        	</div>
+		{% endblock %}
+        
+		{% block enquiries %}
+        	<div class="col-md-12 mid">
+        	<div class="overview_block block">
+            		<h2>Last 10 Enquires</h2>
+                
+            	</div>
+        	</div>
+		{% endblock %}
+    
+    
+    	</div>
+	{% endblock %}
+   	{% block footer %}
+    	<div class="footer text-center">
+    	Copyright 2012 - 2014 Business BIDS
+    	</div>
+    	{% endblock %}
+
+</div>
+</body>
+</html>

@@ -1,0 +1,15 @@
+{% extends '::base_admin.html.twig' %}
+
+{% block content %}
+<div class="container form-horizontal">
+	<h1>Add Category</h1>
+	{{ form_start(form) }}
+	<div class="addcategory-wrapper form-horizontal">
+		<div class="control-group">{{ form_label(form.segmentid) }}</div>  <div class="control">{{ form_widget(form.segmentid) }}</div>
+		<div class="control-group">{{ form_label(form.category) }}</div>  <div class="control">{{ form_widget(form.category) }}</div>
+		<div class="control-group">{{ form_label(form.suite) }}</div>  <div class="control">{{ form_widget(form.suite) }}</div>
+		<div class="control-group">{{ form_label(form.description) }}</div>  <div class="control">{{ form_widget(form.description) }}</div>
+		<div class="control-group">{{ form_rest(form) }}</div>
+	</div>
+</div>
+{% endblock %}

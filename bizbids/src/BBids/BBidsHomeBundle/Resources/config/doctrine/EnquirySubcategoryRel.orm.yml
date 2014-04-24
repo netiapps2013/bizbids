@@ -1,0 +1,15 @@
+BBids\BBidsHomeBundle\Entity\EnquirySubcategoryRel:
+    type: entity
+    table: bbids_enquirysubcategoryrel
+    id: 
+        id: 
+            type: integer
+            length: '7'
+            generator: { strategy: AUTO }
+    fields: 
+        enquiryid: 
+           type: integer
+           length: '7'
+        subcategoryid:
+           type: integer
+           length: '7'   

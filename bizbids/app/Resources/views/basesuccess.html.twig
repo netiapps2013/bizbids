@@ -1,0 +1,17 @@
+{% extends '::base.html.twig' %}
+
+{% block banner %}
+
+{% endblock %}
+
+{% block maincontent %}
+<div class="container">
+<div class="bg-success">
+{% for flashMessage in app.session.flashbag.get('success') %}
+
+	<div>
+		{{ flashMessage }}
+	</div>
+{% endfor %}
+</div></div> 
+{% endblock %}

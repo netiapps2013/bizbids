@@ -1,0 +1,53 @@
+{% extends '::base_admin.html.twig' %}
+
+{% block content %} 
+<div class="container">
+<div class="page-title"><h1>Edit Information</h1></div>
+<div class="edit-user-block">
+
+
+<div class="form_wrapper col-md-6">
+		{% for flashMessage in app.session.flashbag.get('error') %}
+
+	<div class="alert alert-danger">{{ flashMessage }}</div>
+		
+	{% endfor %}
+	
+	{% for flashMessage in app.session.flashbag.get('success') %}
+
+	<div class="alert alert-success">{{ flashMessage }}</div>
+		
+	{% endfor %}
+	
+
+
+	{{ form_start(form) }}
+		{{ form_errors(form) }}
+<div>
+    <div>   {{ form_errors(form.contactname) }} </div>
+	<div>	{{ form_errors(form.smsphone) }} </div>
+	<div>	{{ form_errors(form.homephone) }} </div>
+	<div>   {{ form_errors(form.address) }} </div>
+	<div>	{{ form_errors(form.bizname) }} </div>
+	<div>	{{ form_errors(form.fax) }} </div>
+	<div>	{{ form_errors(form.status) }} </div> 
+</div>
+<div>
+		<div class="control-group">{{ form_label(form.contactname) }} : </div><div class="control"> {{ form_widget(form.contactname) }}</div>
+		<div class="control-group">{{ form_label(form.smsphone) }}<span class="req">*</span> : </div><div class="control"> {{ form_widget(form.smsphone) }}</div>
+		<div class="control-group">{{ form_label(form.homephone) }} : </div> <div class="control">{{ form_widget(form.homephone) }}</div>
+		<div class="control-group">{{ form_label(form.address) }} : </div><div class="control"> {{ form_widget(form.address) }}</div>
+		<div class="control-group">{{ form_label(form.bizname) }} : </div><div class="control"> {{ form_widget(form.bizname) }}</div>
+		<div class="control-group">{{ form_label(form.fax) }} : </div><div class="control">{{ form_widget(form.fax) }} </div> 
+		<div class="control-group">{{ form_label(form.status) }} </div><div class="control">{{ form_widget(form.status) }} </div> 
+		<div class="sameline">{{ form_rest(form) }}</div>
+		<div class="sameline"> <a class="btn btn-warning" href="{{ path('b_bids_b_bids_admin_users',{'offset':1}) }}">Cancel</a> </div>
+
+
+</div>		
+</div>
+<div class="col-md-6 edit-user"><h4> Editing User: <span>{{ email }}</span></h4></div>
+
+</div>	
+</div>
+{% endblock %}

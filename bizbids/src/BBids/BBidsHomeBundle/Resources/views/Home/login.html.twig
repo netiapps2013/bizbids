@@ -1,0 +1,39 @@
+{% extends '::base.html.twig' %}
+
+{% block banner %}
+
+{% endblock %}
+{% block maincontent %} 
+<div class="container">
+
+	{% for flashMessage in app.session.flashbag.get('error') %}
+
+	<div class="alert alert-danger">{{ flashMessage }}</div>
+		
+	{% endfor %}
+
+	{% for flashMessage in app.session.flashbag.get('success') %}
+
+	<div class="alert alert-success">{{ flashMessage }}</div>
+		
+	{% endfor %}
+	<div class="login-wrapper">
+		{{ form_start(form) }}
+		{{ form_errors(form) }}
+		<div>
+
+			<h4>Admin Login</h4>
+			<div> {{ form_widget(form.email) }}</div>
+
+			<div> {{ form_widget(form.password) }}</div>
+		</div>
+	{{ form_rest(form) }} 
+
+
+		{{ form_end(form) }}
+		<h6><a href="forgotpassword.php">Forgot your password?</a></h6>
+
+	</div>
+</div>
+
+{% endblock %}

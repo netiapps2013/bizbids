@@ -1,0 +1,51 @@
+{% extends '::base_admin.html.twig' %}
+
+{% block content %}
+<div class="container">
+<div class="page-title"><h1>USERS</h1></div>
+<div>
+	{% for flashMessage in app.session.flashbag.get('error') %}
+
+	<div class="alert alert-danger">{{ flashMessage }}</div>
+		
+	{% endfor %}
+	
+	{% for flashMessage in app.session.flashbag.get('success') %}
+
+	<div class="alert alert-success">{{ flashMessage }}</div>
+		
+	{% endfor %}
+<table class="vendor-enquiries">
+<thead><tr><td>Email</td><td>Created Date</td><td>Updated Date</td><td>Last Access Date</td><td>Profile</td><td>Status</td><td>Action</td></tr></thead>
+	{% for user in users %}
+	<tr>
+		<td>{{ user.email }}</td>
+		<td>{{ user.created|date('Y-m-d h:i:s') }}</td>
+		<td>{{ user.updated|date('Y-m-d h:i:s') }}</td>
+		<td>{{ user.lastaccess|date('Y-m-d h:i:s') }}</td>
+		<td>{% if user.profileid == 1 %} Admin {% elseif user.profileid == 2 %} Consumer {% elseif user.profileid == 3 %} Vendor {% endif %}</td>
+		<td>{% if user.status == 1 %} Active {% elseif user.status == 2 %} Inactive {% elseif user.status == 3 %} Blocked {% endif %}</td>
+		<td><a href="{{ path('b_bids_b_bids_admin_user_view',{'userid': user.id}) }}">View</a> | <a href="{{ path('b_bids_b_bids_admin_user_edit',{'userid': user.id}) }}">Edit</a> | <a href="{{ path('b_bids_b_bids_admin_user_delete',{'userid': user.id}) }}" onclick="confirm('"Are you sure to delete the user? The record once deleted cannot be retrived back');">Delete</a></td>
+	{% endfor %}
+</table>
+</div>
+<div>
+<div>Now showing : {{ from }} to {{ to }} records</div>
+<div>{% set page_count = -count//10 %} 
+<ul class="pagination">
+
+  <li><a href="{{ path('b_bids_b_bids_admin_users',{'offset':1}) }}">&laquo;</a></li>
+{% for i in 1..-(page_count) %}
+
+  <li><a href="{{ path('b_bids_b_bids_admin_users',{'offset':i}) }}">{{ i }}</a></li>
+
+{% endfor %}
+  
+  <li><a href="{{ path('b_bids_b_bids_admin_users',{'offset':-(page_count)}) }}">&raquo;</a></li>
+</ul>
+</div> 
+</div>
+
+
+</div> 
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends '::base.html.twig' %}
+
+{% block maincontent %}
+
+{% for flashMessage in app.session.flashbag.get() %}
+
+	{{ flashMessage }}
+
+{% endfor %}
+	
+{% endblock %}
+

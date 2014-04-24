@@ -1,0 +1,75 @@
+{% extends '::base.html.twig' %}
+
+{% block banner %}
+
+{% endblock %}
+{% block maincontent %} 
+<div class="container">
+
+	{% for flashMessage in app.session.flashbag.get('error') %}
+
+	<div class="alert alert-danger">{{ flashMessage }}</div>
+		
+	{% endfor %}
+
+	{% for flashMessage in app.session.flashbag.get('success') %}
+
+	<div class="alert alert-success">{{ flashMessage }}</div>
+		
+	{% endfor %}
+	<div class="login-wrapper col-md-6">
+		{{ form_start(form) }}
+		{{ form_errors(form) }}
+		<div class="login-fb">
+			<a href="#" class="fb-but"></a>
+			<p>We won't post anything on your wall without your permission</p>
+		</div>	
+		<h2> <span>OR</span> </h2>
+		<div>
+
+			<h4>Login with your email address</h4>
+			<div> {{ form_widget(form.email) }}</div>
+
+			<div> {{ form_widget(form.password) }}</div>
+		</div>
+	{{ form_rest(form) }} 
+
+
+		<h6><a href="forgotpassword.php">Forgot your password?</a></h6>
+
+	
+
+		<div class="new-user">Are you a new user? <a href="register.php">Register here</a></div>
+	</div>
+	<div class="col-md-6 account-content">
+	<h2>Create an Account</h2>
+	
+	<h3>Convenience</h3>
+	<p>Allows you to receive multiple quotes from vendors with a single form and eliminate the hassle of multiple searches</p> 
+	
+	<h3>Competitive Pricing</h3>
+	<p>Receive at least three quotations from vendors so you know you have a choice to get the most competitive pricing!</p>
+	
+	<h3>Speed</h3>
+	<p>As vendors are competing with each other you can be assured that you will get a swift response. No more waiting around!</p>
+	
+	<h3>Reputation</h3>
+	<p>All vendors are pre-qualified and verified to ensure they are reputable and skilled</p>
+	
+	<h3>Quality</h3>
+	<p>Our vendor rating system focusses on vendors delivering high quality service and a positive user experience</p>
+	
+	<h3>Free to Use</h3>
+	<p>The website is completely free for users with no search or membership fees charged ever! </p>
+	
+	<h3>Portal</h3>
+	<p>Get access to your personal services dashboard where you can view and manage your jobs from anywhere, anytime</p>
+	
+	
+	
+
+</div>
+
+</div>
+
+{% endblock %}

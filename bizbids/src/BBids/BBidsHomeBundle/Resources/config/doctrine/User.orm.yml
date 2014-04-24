@@ -1,0 +1,40 @@
+BBids\BBidsHomeBundle\Entity\User:
+    type: entity
+    table: bbids_user
+    id: 
+        id: 
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+       password:  
+           type: string
+           length: 60
+           nullable: TRUE
+       email:
+           type: string
+           length: 40
+           unique: TRUE
+       created: 
+           type: datetime
+           nullable: true
+       updated:
+           type: datetime
+       lastaccess:
+           type:  datetime
+           nullable: TRUE
+       logincount:
+           type: integer
+           length: 2
+           nullable: TRUE
+       userhash:
+           type: string
+           length: 60
+           nullable: TRUE
+       mobilecode: 
+           type: integer
+           length: '7'
+           nullable: true
+       status:
+           type: integer
+           length: 6
+      

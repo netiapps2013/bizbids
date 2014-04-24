@@ -1,0 +1,42 @@
+BBids\BBidsHomeBundle\Entity\Order:
+    type: entity
+    table: bbids_order
+    id:
+        id: 
+            type: integer
+            length: '7'
+            generator: { strategy : AUTO } 
+    fields: 
+        ordernumber:
+             type: string
+             length: '10'
+        created:
+             type: datetime
+             nullable: TRUE
+        updated: 
+             type: datetime
+        amount: 
+             type: string
+             length: '10'
+        payoption:
+             type: string
+             length: '20'
+        transactionid: 
+             type: string
+             length: '40'
+             nullable: TRUE
+        bankname: 
+              type: string
+              length: '30'
+              nullable: TRUE
+        transactionstatus: 
+              type: string
+              length: '50'
+              nullable: TRUE
+        author:
+              type: integer
+              length: '7'
+        status: 
+              type: integer
+              length:  '7'
+     

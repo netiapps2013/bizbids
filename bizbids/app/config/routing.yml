@@ -1,0 +1,4 @@
+b_bids_b_bids_home:
+    resource: "@BBidsBBidsHomeBundle/Resources/config/routing.yml"
+    prefix:   /
+

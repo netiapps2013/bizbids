@@ -1,0 +1,22 @@
+BBids\BBidsHomeBundle\Entity\Vendorcategoriesrel:
+    type: entity
+    table: bbids_vendorcategoriesrel
+    id:
+        id: 
+            type: integer
+            generator: { strategy: AUTO }
+    fields:  
+        vendorid: 
+            type: integer
+            length: '7'
+        categoryid: 
+            type: integer
+            length: '7'
+        leadpack: 
+            type: integer
+            length: '7'
+            nullable: True
+        status: 
+            type: integer
+            length:  '7'
+

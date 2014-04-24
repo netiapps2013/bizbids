@@ -1,0 +1,7 @@
+parameters:
+#    b_bids_b_bids_home.example.class: BBids\BBidsHomeBundle\Example
+
+services:
+#    b_bids_b_bids_home.example:
+#        class: %b_bids_b_bids_home.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

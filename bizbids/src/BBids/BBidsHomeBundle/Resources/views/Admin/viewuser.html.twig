@@ -1,0 +1,37 @@
+{% extends '::base_admin.html.twig' %}
+
+{% block content %}
+<div class="container"> 
+<div class="page-title"><h1>User Information</h1></div>
+<div class="col-sm-6 vendor-user gray-bg">
+	{% for user in users %}
+	<div class="field-item"><label>Email</label><div class="field-value">: {{ user.email }} </div></div>
+	<div class="field-item"><label>Created Date</label><div class="field-value">: {{ user.created|date('Y-m-d h:i:s') }} </div></div>
+	<div class="field-item"><label>Updated Date</label><div class="field-value">: {{ user.updated|date('Y-m-d h:i:s') }} </div></div>
+	<div class="field-item"><label>Last Access</label><div class="field-value">: {{ user.lastaccess|date('Y-m-d h:i:s') }} </div></div>
+	<div class="field-item"><label>Status</label><div class="field-value">: {% if user.status == 1 %} Active {% elseif user.status == 2 %} Inactive {% elseif user.status == 3 %} Blocked {% endif %} </div></div>	
+	
+		
+	{% endfor %}
+
+	{% for account in accounts %}
+	<div class="field-item"><label>Contact Name</label><div class="field-value">: {{ account.contactname }} </div></div>
+	<div class="field-item"><label>Profile</label><div class="field-value">: {% if account.profileid == 1 %} Admin {% elseif account.profileid == 2 %} Consumer {% elseif account.profileid == 3 %} Vendor {% endif %} </div></div>
+	<div class="field-item"><label>Mobile</label><div class="field-value">: {{ account.smsphone }} </div></div>
+	{% if account.homephone is not empty %}
+	<div class="field-item"><label>Home phone</label><div class="field-value">: {{ account.homephone }}</div></div>
+	{% endif %}
+	{% if account.bizname is not empty %}
+	<div class="field-item"><label>Business/Company name</label><div class="field-value">: 	{{ account.bizname }} </div></div>
+	{% endif %}
+	{% if account.fax is not empty %}
+	<div class="field-item"><label>Fax</label><div class="field-value">: {{ account.fax }} </div></div>
+	{% endif %}
+	{% if account.address is not empty %}
+	<div class="field-item"><label>Address</label><div class="field-value">: {{ account.address }} </div></div>
+	{% endif %}
+		
+	{% endfor %}
+</div>
+</div>
+{% endblock %}

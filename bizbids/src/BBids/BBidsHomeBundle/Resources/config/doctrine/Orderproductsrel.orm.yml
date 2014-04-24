@@ -1,0 +1,19 @@
+BBids\BBidsHomeBundle\Entity\Orderproductsrel:
+    type: entity
+    table: bbids_orderproductsrel
+    id: 
+         id:
+             type: integer
+             length: '7'
+             generator: { strategy: AUTO }
+    fields: 
+        ordernumber: 
+            type: integer
+            length: '7'
+        categoryid:
+             type: integer
+             length:  '7'
+        leadpack:
+             type: integer
+             length: '7'
+          

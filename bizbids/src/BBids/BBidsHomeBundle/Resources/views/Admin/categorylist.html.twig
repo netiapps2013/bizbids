@@ -1,0 +1,55 @@
+{% extends '::base_admin.html.twig' %}
+
+{% block content %}
+<div class="inner_container container">
+<div class=""><h3>Category List <a class="btn btn-success pull-right"  href="#">Add Category</a></h3> </div>
+	<div class="segment-content row">
+	{% for flashMessage in app.session.flashbag.get('error') %}
+
+	<div class="alert alert-danger">{{ flashMessage }}</div>
+		
+	{% endfor %}
+	
+	{% for flashMessage in app.session.flashbag.get('success') %}
+
+	<div class="alert alert-success">{{ flashMessage }}</div>
+		
+	{% endfor %}
+	<table class="table table-bordered">
+        <thead>
+         <tr>
+            <th>Category Name</th>
+            <th>Description</th>
+            <th>Price (AED)</th>
+            <th>Sub Links</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+         
+	{% for category in categories %}
+	 <tr>
+		
+		<td>{{ category.category }}</td>
+		<td>{{ category.description }}</td>
+		<td>{{ category.price }}</td>
+		<td><a href="{{ path('b_bids_b_bids_admin_subcategories', {'categoryid' : category.id}) }}" >Subcategory</a> | <a href="{{ path('b_bids_b_bids_admin_keywords', {'categoryid' : category.id}) }}" >Keyword</a></td>
+		<td>
+		
+	
+		{#<a href="{{ path('b_bids_b_bids_admin_add_keyword', {'categoryid' : category.id}) }}" class="btn btn-warning">Add Keyword</a>#}
+		<a href="#" class="btn btn-warning"> Edit</a>
+		<a href="#" class="btn btn-danger"> Delete</a>
+		</td>
+	</tr>	
+	{% endfor %}
+	</tbody>
+	</table>
+</div>
+
+</div> 
+{% endblock %}
+
+
+
+

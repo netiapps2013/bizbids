@@ -1,0 +1,30 @@
+{% extends '::base.html.twig' %}
+
+{% block banner %}
+
+{% endblock %}
+
+{% block maincontent %} 
+<div class="container">
+	{% for flashMessage in app.session.flashbag.get('error') %}
+
+			<div class="alert alert-danger">{{ flashMessage }}</div>
+	
+	{% endfor %}
+
+	{% for flashMessage in app.session.flashbag.get('success') %}
+
+			<div class="alert alert-success">{{ flashMessage }}</div>
+	
+	{% endfor %}
+	<div class="bg-success">Your SMSCode is <span>{{ smscode }}</span> </div>
+	{{ form_start(form) }}
+	<div class="form_wrapper">
+		<div> {{ form_errors(form) }} </div>
+		<div> {{ form_errors(form.mobilecode) }} </div>
+		<div>{{ form_label(form.mobilecode) }} :</div> <div class="control">{{ form_widget(form.mobilecode) }}</div>
+		
+		{{ form_rest(form) }}
+	</div>
+</div>
+{% endblock %}

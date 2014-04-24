@@ -1,0 +1,11 @@
+<?php
+// src/BBids/BBidsHomeBundle/Entity/Keyword.php
+
+namespace BBids\BBidsHomeBUndle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+class Keyword
+{
+}
+?>

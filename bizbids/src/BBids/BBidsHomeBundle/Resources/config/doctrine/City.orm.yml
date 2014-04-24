@@ -1,0 +1,13 @@
+BBids\BBidsHomeBundle\Entity\City:
+     type: entity
+     table: bbids_city
+     id : 
+          id:
+               type: integer
+               generator: { strategy: AUTO }
+     fields: 
+          city:
+               type: string
+               length: '20'
+
+

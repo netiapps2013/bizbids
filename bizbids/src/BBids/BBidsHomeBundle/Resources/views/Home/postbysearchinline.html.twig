@@ -1,0 +1,73 @@
+{% extends '::base.html.twig' %}
+
+{% block banner %}
+
+{% endblock %}
+
+{% block maincontent %}
+<div class="container category-search">
+<div class="breadcrum">Home/ {{ category }}</div>
+<div class="category-steps-block">
+	<div class="col-md-4 steps"><span>1</span><p> Tell {{ category }} what you need</p></div>
+	<div class="col-md-4 steps"><span>2</span><p>{{ category }} offer quotes & prices </p></div>
+	<div class="col-md-4 steps"><span>3</span><p>you choose the best {{ category }}</p></div>
+</div>
+
+	{% for flashMessage in app.session.flashbag.get('error') %}
+
+			<div class="alert alert-danger">{{ flashMessage }}</div>
+	
+	{% endfor %}
+
+	{% for flashMessage in app.session.flashbag.get('success') %}
+
+			<div class="alert alert-success">{{ flashMessage }}</div>
+	
+	{% endfor %}
+	
+{{ form_start(form) }}
+<div class="category-service-block">
+<h1 class="title">what kind of {{ category }} do you need?</h1>
+{% for child in form.subcategory %}
+	<div class="col-md-3 sub-category">
+		{{ form_widget(child) }} {{ form_label(child) }}
+        </div>
+
+
+{% endfor %} 
+</div>
+ 
+
+
+	
+			{{ form_errors(form) }}
+<div>
+	<div>   {{ form_errors(form.contactname) }} </div>
+    <div>   {{ form_errors(form.hire) }} </div>
+	<div>	{{ form_errors(form.subj) }} </div>
+	<div>	{{ form_errors(form.description) }} </div>
+	<div>	{{ form_errors(form.email) }} </div>
+	<div>	{{ form_errors(form.homecode) }} </div>
+	<div>	{{ form_errors(form.mobile) }} </div>
+	<div>	{{ form_errors(form.homephone) }} </div>
+	<div>	{{ form_errors(form.city) }} </div>
+	<div>	{{ form_errors(form.accept) }} </div>
+</div>
+<div class="category-wrapper">
+	<div class="categroy-wrapper-fieldset">{{ form_label(form.contactname) }} {{ form_widget(form.contactname) }}</div>
+	<div class="categroy-wrapper-fieldset">{{ form_label(form.email) }} {{ form_widget(form.email) }}</div>
+	<div class="categroy-wrapper-fieldset">{{ form_label(form.mobile) }}{{ form_widget(form.mobile) }} </div>
+	<div class="categroy-wrapper-fieldset contact">{{ form_label(form.homecode) }}: {{ form_widget(form.homecode) }} {{ form_widget(form.homephone) }}</div>
+	<div class="categroy-wrapper-fieldset">{{ form_label(form.city) }} {{ form_widget(form.city) }}</div>
+	<div class="categroy-wrapper-fieldset">{{ form_label(form.hire) }} {{ form_widget(form.hire) }}</div>
+	<div class="categroy-wrapper-fieldset">{{ form_label(form.subj) }} {{ form_widget(form.subj) }}</div>
+	<div class="categroy-wrapper-fieldset">{{ form_label(form.description) }}  {{ form_widget(form.description) }}<p class="help-blocksearch">(maximum 250 characters) No of characters left :  <b id="charactercount"></b></p></div>
+	<div class="categroy-wrapper-fieldset terms">{{ form_widget(form.accept) }} {{ form_label(form.accept) }}</div>
+	<div class="category-wrapper-fieldset"><div class="text-center">{{ form_rest(form) }}</div></div>
+</div>
+
+
+	
+	
+</div>
+{% endblock %}
