@@ -1,0 +1,15 @@
+BBids\BBidsHomeBundle\Entity\Keyword:
+    type: entity
+    table: bbids_keywords
+    id: 
+        id:
+            type: integer
+            length: '7'
+            generator : { strategy : AUTO }
+    fields: 
+        parentid: 
+            type: integer
+            length: '7'
+        keyword: 
+            type: string
+        

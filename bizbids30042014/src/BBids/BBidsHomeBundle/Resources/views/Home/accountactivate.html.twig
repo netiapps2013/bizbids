@@ -1,0 +1,44 @@
+{% extends '::base.html.twig' %}
+
+{% block banner %}
+
+{% endblock %}
+ 
+{% block maincontent %}
+<div class="container form-horizontal">
+<h1>Account Activation</h1>
+<div class="form_wrapper">
+	
+	{% for flashMessage in app.session.flashbag.get('error') %}
+
+		<div class="alert alert-danger">{{ flashMessage }}</div>
+	
+	{% endfor %}
+
+	{% for flashMessage in app.session.flashbag.get('success') %}
+
+		<div class"alert alert-success">{{ flashMessage }}</div>
+	
+	{% endfor %}
+	{% for flashMessage in app.session.flashbag.get('message') %}
+
+	<div class="alert alert-success">{{ flashMessage }}</div>
+		
+	{% endfor %}
+	
+	
+		{{ form_start(form) }}
+			{{ form_errors(form) }}
+		<div>
+		    <div>   {{ form_errors(form.password.first) }} </div>
+			<div>	{{ form_errors(form.password.second) }} </div>
+		</div>
+		<div>
+			<div> {{ form_label(form.password.first) }} <span class="req">*</span> : </div><div class="control"> {{ form_widget(form.password.first) }} </div>
+			<div> {{ form_label(form.password.second) }} <span class="req">*</span> :  </div><div class="control"> {{ form_widget(form.password.second) }} </div>
+			<div> {{ form_rest(form) }}  </div>
+		</div>
+</div>
+</div>
+{% endblock %}
+

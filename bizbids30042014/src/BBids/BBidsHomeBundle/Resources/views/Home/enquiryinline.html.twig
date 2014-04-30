@@ -1,0 +1,67 @@
+{% extends '::base.html.twig' %}
+
+{% block banner %}
+
+{% endblock %}
+
+{% block maincontent %}
+
+
+<div class="container">
+<div class="page-title"><h1>Post your Requirement</h1></div>
+<p>I have enjoyed working with NetiApps  they listens and makes  appropriate suggestion and that is a real help with a small office and no time to spend design a web site. What I really find impressive is the service  after  the sale ,they are always there to help with my website.</p>
+
+{% for flashMessage in app.session.flashbag.get('error') %}
+
+	<div class="alert alert-danger">{{ flashMessage }}</div>
+
+{% endfor %}
+
+{% for flashMessage in app.session.flashbag.get('success') %}
+
+        <div class="alert alert-success">{{ flashMessage }}</div>
+
+{% endfor %}
+	{% for flashMessage in app.session.flashbag.get('message') %}
+
+	<div class="alert alert-success">{{ flashMessage }}</div>
+		
+	{% endfor %}
+
+	{{ form_start(form) }}
+	<div> {{ form_errors(form) }} </div>
+	<div> {{ form_errors(form.contactname) }} </div>
+	<div> {{ form_errors(form.email) }} </div>
+	<div> {{ form_errors(form.smsphone) }} </div>
+	<div> {{ form_errors(form.homecode) }} </div>
+	<div> {{ form_errors(form.homephone) }} </div>
+	<div> {{ form_errors(form.category) }} </div>
+	<div> {{ form_errors(form.subcategory) }} </div>
+	<div> {{ form_errors(form.subj) }} </div>
+	<div> {{ form_errors(form.description) }} </div>
+	<div> {{ form_errors(form.city) }} </div>
+
+<div class="col-sm-6 post-requirement gray-bg">
+	<h2> Your Registration details </h2>
+	<div class="form-item"> {{ form_label(form.contactname) }}  <div class="field-item">{{ form_widget(form.contactname) }} </div></div>
+	<div class="form-item"> {{ form_label(form.email) }} <div class="field-item">{{ form_widget(form.email) }} </div></div>
+	<div class="form-item"> {{ form_label(form.smsphone) }}  <div class="field-item">{{ form_widget(form.smsphone) }} </div></div>
+	<div class="form-item"> {{ form_label(form.homecode) }} <div class="field-item">{{ form_widget(form.homecode) }} {{ form_widget(form.homephone) }} </div></div>
+</div>
+
+<div class="col-sm-6 enquiry-details gray-bg">
+	<h2> Your Enquiry details </h2>
+	<div class="form-item"> {{ form_label(form.category) }}  <div class="field-item">{{ form_widget(form.category) }}</div></div>
+	<div class="form-item"> {{ form_label(form.subcategory) }}  <div class="field-item">{{ form_widget(form.subcategory) }} </div></div>
+	<div class="form-item"> {{ form_label(form.subj) }}  <div class="field-item">{{ form_widget(form.subj) }} </div></div>
+	<div class="form-item"> {{ form_label(form.description) }}  <div class="field-item">{{ form_widget(form.description) }} <p class="help-block">(maximum 300 characters)</p></div></div>
+	<div class="form-item">  {{ form_label(form.city) }}  <div class="field-item">{{ form_widget(form.city) }} </div></div>
+
+</div>
+<div>	<div class="form-item">  {{ form_rest(form) }} </div></div>
+
+
+
+
+</div>
+{% endblock %}

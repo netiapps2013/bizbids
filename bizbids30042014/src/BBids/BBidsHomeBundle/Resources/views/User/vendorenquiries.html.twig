@@ -1,0 +1,68 @@
+{% extends '::vendor_dashboard.html.twig' %}
+
+{% block pageblock %}
+<script type="text/javascript">
+
+ function confirmEnq(enqcat,enqid,count){
+	var con = confirm(count +" lead(s) will be deducted upon accepting this enquiry. Are you sure to Accept this enquiry? This action cannot be reverted!");
+	if(con){
+		var url = "{{ path('b_bids_b_bids_accept_enquiry',{'category': "enqcat", 'enquiryid': "enqid" }) }}";
+		var urlset = url.replace('enqcat', enqcat);
+		var urlset = urlset.replace('enqid', enqid);
+		window.open(urlset,"_self");
+		return true;
+	}else{
+		return false;
+	}
+ 
+ }
+ 
+ function pullcount(enqcat,enqid){
+ 
+ 			
+			var realpath = window.location.protocol + "//" + window.location.host + "/";
+				var xmlhttp;
+				if (window.XMLHttpRequest)
+				  {// code for IE7+, Firefox, Chrome, Opera, Safari
+				  xmlhttp=new XMLHttpRequest();
+				  }
+				else
+				  {// code for IE6, IE5
+				  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+				  }
+				xmlhttp.onreadystatechange=function()
+				  {
+				  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+					{
+							//alert(xmlhttp.responseText);
+						
+						confirmEnq(enqcat,enqid,xmlhttp.responseText);
+						
+					}
+				  }
+				xmlhttp.open("GET",realpath+"~anup/bizbids/pullEnquiryCount.php?enqid="+enqid,true);
+				xmlhttp.send();				
+}
+</script>
+<div class="container">
+<div class="page-title"><h1>Enquiries</h1></div>
+<div>
+<table class="vendor-enquiries">
+<thead><tr><td>Subject</td><td>Description</td><td>City</td><td>Category</td><td>Created Date</td><td>Action</td></tr></thead>
+
+	{% for enquiry in enquiries %}
+	<tr>
+    
+<td>{{ enquiry.subj }} </td>
+<td>{{ enquiry.description|slice(0, 20) }} </td>
+<td>{{ enquiry.city }} </td>
+<td>{{ enquiry.category }} </td>		
+<td>{{ enquiry.created|date('Y-m-d h:i:s') }} </td>
+
+<td>{% if enquiry.leadstatus == 1 %} Accepted {% else %} <a href="#" onclick="pullcount('{{ enquiry.category }}','{{ enquiry.id }}')";>Accept Lead</a> {% endif %}</td>
+	</tr>
+	{% endfor %}
+	</table>
+</div>
+</div>
+{% endblock %}

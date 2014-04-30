@@ -1,0 +1,54 @@
+{% extends '::base_admin.html.twig' %}
+
+{% block content %}
+<div class="container inner_container">
+	<div class="row">
+		<div class="col-md-2 left-nav">
+			<ul class="nav nav-pills nav-stacked">
+				<li class="active"><a href="#">Catrgories</a></li>
+				<li><a href="#">Cities</a></li>
+				<li><a href="#">Package</a></li>
+				<li><a href="#">Package</a></li>
+				<li><a href="#">Package</a></li>
+				<li><a href="#">Package</a></li>
+			</ul>
+		</div>
+		<div class="col-md-10 right-pan">
+			<div class="row">
+				<div class="col-md-4"><button type="button" class="btn btn-default btn-block">Segment</button></div>
+				<div class="col-md-4"><button type="button" class="btn btn-primary active btn-block">Categories</button></div>
+				<div class="col-md-4"><button type="button" class="btn btn-default btn-block">Sub Categories</button></div>
+			</div>
+			<div class="row">
+				<table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Category Name</th>
+            <th>Price</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td><a href="#">Edit</a>/<a href="#">Delete</a></td>
+          </tr>
+          <tr>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td><a href="#">Edit</a>/<a href="#">Delete</a></td>
+          </tr>
+          <tr>
+            <td>Table cell</td>
+            <td>Table cell</td>
+			<td><a href="#">Edit</a>/<a href="#">Delete</a></td>
+          </tr>
+        </tbody>
+      </table>
+			</div>		
+		</div>
+	</div>
+</div>
+
+{% endblock %}

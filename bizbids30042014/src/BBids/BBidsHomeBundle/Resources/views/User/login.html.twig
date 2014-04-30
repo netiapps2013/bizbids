@@ -1,0 +1,152 @@
+{% extends '::base.html.twig' %}
+
+{% block banner %}
+
+{% endblock %}
+{% block maincontent %} 
+<script>
+$(document).ready(function(){
+$('#vendor').css('display','none');
+
+$('#customertab').click(function(){
+    
+		$('#vendor').css('display','none');
+		$('#customer').css('display','block');
+		$("#register").attr("href", "{{ path('b_bids_b_bids_consumer_register') }}")
+
+});
+$('#vendortab').click(function(){
+		$('#customer').css('display','none');
+		$('#vendor').css('display','block');
+		$("#register").attr("href", "{{ path('b_bids_b_bids_vendor_register') }}")
+		
+	});
+	
+});
+
+</script>
+<div class="container">
+
+	{% for flashMessage in app.session.flashbag.get('error') %}
+
+	<div class="alert alert-danger">{{ flashMessage }}</div>
+		
+	{% endfor %}
+
+	{% for flashMessage in app.session.flashbag.get('success') %}
+
+	<div class="alert alert-success">{{ flashMessage }}</div>
+		
+	{% endfor %}
+	{% for flashMessage in app.session.flashbag.get('message') %}
+
+	<div class="alert alert-success">{{ flashMessage }}</div>
+		
+	{% endfor %}
+	
+<div class="login-wrapper col-md-12">
+<ul class="nav nav-tabs tabs">
+	  <li class="active"><a href="#home" data-toggle="tab" id="customertab">Customer</a></li>
+	  <li><a href="#profile" data-toggle="tab" id="vendortab">Vendor</a></li>
+	</ul>
+<div class="login_inner_wrapper">
+<div class="login-block col-md-6">
+	
+	
+		{{ form_start(form) }}
+		{{ form_errors(form) }}
+	
+		<div class="login-fb">
+			<a href="#" class="fb-but"></a>
+			<p>We won't post anything on your wall without your permission</p>
+		</div>	
+		<h2> <span>OR</span> </h2>
+	
+		<div>
+
+			<h4>Login with your email address</h4>
+			<div> {{ form_widget(form.email) }}</div>
+
+			<div> {{ form_widget(form.password) }}</div>
+		</div>
+	{{ form_rest(form) }} 
+
+
+		<h6><a href="{{ path('b_bids_b_bids_forgot_password') }}" >Forgot your password?</a></h6>
+
+	
+
+		<div class="new-user">Are you a new user? <a href="{{ path('b_bids_b_bids_consumer_register') }}" id="register">Register here</a></div>
+</div>
+<div class="col-md-6 login-content" id="customer">
+	<h4>Create a Customer Account</h4>
+	<div class="login-icon icon-1">
+		<h3>Convenience</h3>
+		<p>Allows you to receive multiple quotes from vendors with a single form and eliminate the hassle of multiple searches</p> 
+	</div>
+	
+	<div class="login-icon icon-2">
+		<h3>Competitive Pricing</h3>
+		<p>Receive at least three quotations from vendors so you know you have a choice to get the most competitive pricing!</p>
+	</div>
+	
+	<div class="login-icon icon-3">
+		<h3>Speed</h3>
+		<p>As vendors are competing with each other you can be assured that you will get a swift response. No more waiting around!</p>
+	</div>
+	
+	<div class="login-icon icon-4">
+		<h3>Reputation</h3>
+		<p>All vendors are pre-qualified and verified to ensure they are reputable and skilled</p>
+	</div>
+	
+	<div class="login-icon icon-5">
+		<h3>Quality</h3>
+		<p>Our vendor rating system focusses on vendors delivering high quality service and a positive user experience</p>
+	</div>
+	
+	<div class="login-icon icon-6">
+		<h3>Free to Use</h3>
+		<p>The website is completely free for users with no search or membership fees charged ever! </p>
+	</div>
+	
+	<div class="login-icon icon-7">
+		<h3>Portal</h3>
+		<p>Get access to your personal services dashboard where you can view and manage your jobs from anywhere, anytime</p>
+	</div>
+	
+	
+
+</div>
+<div class="col-md-6 login-content" id="vendor">
+	<h4>Create a Vendor Account</h4>
+	
+	<div class="login-icon icon-8">
+		<h3>Competitive Edge</h3>
+		<p>Get qualified leads provided to you for your business. Stay ahead of your competition!</p> 
+	</div>
+	
+	<div class="login-icon icon-9">
+		<h3>Choice of Jobs</h3>
+		<p>You choose if you want to accept the lead or not. Pay only for leads accepted!</p>
+	</div>
+	
+	<div class="login-icon icon-10">
+		<h3>Extend your reach</h3>
+		<p>Let us do the hard work and provide leads from areas outside your immediate business reach. Extend your services further!</p>
+	</div>
+	
+	<div class="login-icon icon-11">
+		<h3>Dashboard</h3>
+		<p>Get access to your personal services dashboard with information on leads offered, leads accepted and outstanding jobs and much more and manage your jobs 
+	from anywhere, anytime</p>
+	</div>
+	
+</div>
+
+</div>
+</div>
+
+</div>
+
+{% endblock %}

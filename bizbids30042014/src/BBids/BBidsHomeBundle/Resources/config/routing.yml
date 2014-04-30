@@ -1,0 +1,183 @@
+b_bids_b_bids_home_homepage:
+    pattern: /
+    defaults: { _controller: BBidsBBidsHomeBundle:Home:index }
+b_bids_b_bids_home_search:
+    pattern: /search
+    defaults: { _controller: BBidsBBidsHomeBundle:Home:search }
+b_bids_b_bids_admin_home:
+    pattern: /admin
+    defaults: { _controller: BBidsBBidsHomeBundle:Admin:index }
+b_bids_b_bids_admin_home:
+    pattern: /admin/home
+    defaults: { _controller: BBidsBBidsHomeBundle:Admin:home }
+b_bids_b_bids_admin_login:
+    pattern: /admin/login
+    defaults: { _controller: BBidsBBidsHomeBundle:Admin:login }
+b_bids_b_bids_admin_categories:
+    pattern: /admin/categories:
+    defaults: { _controller: BBidsBBidsHomeBundle:Admin:categories }
+b_bids_b_bids_admin_category_add:
+    pattern: /admin/category/add
+    defaults: { _controller: BBidsBBidsHomeBundle:Admin:addcategory }
+b_bids_b_bids_consumer_register:
+    pattern: /consumer/register
+    defaults: { _controller: BBidsBBidsHomeBundle:User:consumerregister }
+b_bids_b_bids_user_sms_verify:
+    pattern: /user/smsverify/{smscode}/{userid}/{path}/{enquiryid}
+    defaults : { _controller: BBidsBBidsHomeBundle:User:smsverify }
+b_bids_b_bids_user_email_verify:
+    pattern: /user/email/verify/{userid}/{userhash}
+    defaults: { _controller: BBidsBBidsHomeBundle:User:emailverify }
+b_bids_b_bids_user_sms_verified:
+    pattern: /user/sms/verified
+    defaults: { _controller: BBidsBBidsHomeBundle:User:smsverified }
+b_bids_b_bids_user_email_verified:
+   pattern: /user/email/verified
+   defaults: { _controller: BBidsBBidsHomeBundle:User:emailverified }
+b_bids_b_bids_post_job:
+   pattern: /post/job
+   defaults: { _controller: BBidsBBidsHomeBundle:Home:postjob }
+b_bids_b_bids_post_quote:
+   pattern: /post/quote
+   defaults: { _controller: BBidsBBidsHomeBundle:Home:postquote }
+b_bids_b_bids_post_quote_inline:
+   pattern: /post/quote/inline
+   defaults: { _controller: BBidsBBidsHomeBundle:Home:postquoteinline }
+b_choosesubcategoriesbycategory:
+   pattern: /chooseSubcategoriesByCategory
+   defaults: { _controller: BBidsBBidsHomeBundle:Home:chooseSubcategoriesByCategory }
+b_bids_b_bids_enquiry_processing:
+   pattern: /enquiry/process
+   defaults: { _controller: BBidsBBidsHomeBundle:Home:enquiryprocess }
+b_bids_b_bids_vendor_register:
+   pattern: /vendor/register
+   defaults: { _controller : BBidsBBidsHomeBundle:User:vendorregister }
+b_bids_b_bids_post_by_search:
+   pattern: /post/quote/bysearch/{categoryid}
+   defaults: { _controller: BBidsBBidsHomeBundle:Home:postbysearch }
+b_bids_b_bids_post_by_search_inline:
+   pattern: /post/quote/bysearch/inline/{categoryid}
+   defaults: { _controller: BBidsBBidsHomeBundle:Home:postbysearchinline }
+b_bids_b_bids_vendor_register_step_2:
+   pattern: /vendor/choosecategories
+   defaults: { _controller: BBidsBBidsHomeBundle:User:vendorcategories }
+b_bids_b_bids_admin_master:
+   pattern: /admin/master
+   defaults: { _controller : BBidsBBidsHomeBundle:Admin:loadmaster }
+b_bids_b_bids_account: 
+   pattern: /account
+   defaults: { _controller: BBidsBBidsHomeBundle:User:account }
+b_bids_b_bids_logout:
+   pattern: /logout
+   defaults: { _controller: BBidsBBidsHomeBundle:User:logout }
+b_bids_b_bids_login:
+   pattern: /login
+   defaults: { _controller: BBidsBBidsHomeBundle:User:login }
+b_bids_b_bids_vendor_home:
+   pattern: /vendor/home
+   defaults: { _controller: BBidsBBidsHomeBundle:User:vendorhome }
+b_bids_b_bids_home:
+   pattern: /home
+   defaults: { _controller: BBidsBBidsHomeBundle:User:home }
+b_bids_b_bids_vendor_buy_leads:
+   pattern: /vendor/buy/leads
+   defaults: { _controller: BBidsBBidsHomeBundle:Vendor:buyleads }
+b_bids_b_bids_vendor_choose_lead_pack:
+   pattern: /vendor/choosepack
+   defaults: { _controller: BBidsBBidsHomeBundle:User:choosepack }
+b_bids_b_bids_consumer_home: 
+   pattern: /consumer/home
+   defaults: { _controller: BBidsBBidsHomeBundle:User:consumerhome }
+b_bids_b_bids_vendor_enquiries:
+   pattern: /vendor/enquiries
+   defaults: { _controller: BBidsBBidsHomeBundle:User:vendorenquiries }
+b_bids_b_bids_enquiries_my:
+   pattern: /enquiries/my
+   defaults: { _controller: BBidsBBidsHomeBundle:User:myenquiries }
+b_bids_b_bids_leads_my:
+   pattern: /leads/my
+   defaults: { _controller: BBidsBBidsHomeBundle:User:buyleads }
+b_bids_b_bids_accept_enquiry:
+   pattern: /enquiry/accept/{category}/{enquiryid}
+   defaults: { _controller: BBidsBBidsHomeBundle:Home:acceptenquiry }
+b_bids_b_bids_admin_users:
+   pattern: /admin/users/{offset}
+   defaults: { _controller : BBidsBBidsHomeBundle:Admin:users }
+b_bids_b_bids_admin_user_edit:
+   pattern: /admin/user/edit/{userid}
+   defaults: { _controller: BBidsBBidsHomeBundle:Admin:edituser }
+b_bids_b_bids_admin_user_delete:
+   pattern: /admin/user/delete/{userid}
+   defaults: { _controller: BBidsBBidsHomeBundle:Admin:deleteuser }
+b_bids_b_bids_admin_user_view:
+   pattern: /admin/user/view/{userid}
+   defaults: { _controller: BBidsBBidsHomeBundle:Admin:viewuser }
+b_bids_b_bids_admin_enquiries:
+   pattern: /admin/enquiries/{offset}
+   defaults: { _controller: BBidsBBidsHomeBundle:Admin:enquiries }
+b_bids_b_bids_admin_enquiry_delete:
+   pattern: /admin/enquiry/delete/{enquiryid}
+   defaults: { _controller: BBidsBBidsHomeBundle:Admin:enquirydelete }
+b_bids_b_bids_admin_enquiry_edit:
+   pattern: /admin/enquiry/edit/{enquiryid}
+   defaults: { _controller: BBidsBBidsHomeBundle:Admin:enquiryedit }
+b_bids_b_bids_admin_enquiry_view:
+   pattern: /admin/enquiry/view/{enquiryid}
+   defaults: { _controller: BBidsBBidsHomeBundle:Admin:enquiryview }
+b_bids_b_bids_admin_mapped_vendors:
+   pattern: /admin/mapped/vendors/{enquiryid}
+   defaults: { _controller: BBidsBBidsHomeBundle:Admin:mappedvendors }
+b_bids_b_bids_admin_vendor_response: 
+   pattern: /admin/vendor/response/{enquiryid}
+   defaults: { _controller: BBidsBBidsHomeBundle:Admin:vendorresponse }
+b_bids_b_bids_admin_categories:
+   pattern: /admin/categories
+   defaults: { _controller: BBidsBBidsHomeBundle:Admin:categories }
+b_bids_b_bids_admin_add_subcategory:
+   pattern: /admin/add/subcategory/{categoryid}
+   defaults: { _controller: BBidsBBidsHomeBundle:Admin:addsubcategory }
+b_bids_b_bids_admin_add_keyword:
+   pattern: /admin/add/keyword/{categoryid}
+   defaults: { _controller: BBidsBBidsHomeBundle:Admin:addkeyword }
+b_bids_b_bids_admin_subcategories:
+   pattern: /admin/subcategories/{categoryid}
+   defaults: { _controller: BBidsBBidsHomeBundle:Admin:subcategories }
+b_bids_b_bids_admin_keywords:
+   pattern: /admin/keywords/{categoryid}
+   defaults: { _controller: BBidsBBidsHomeBundle:Admin:keywords }
+b_bids_b_bids_grow_your_business:
+   pattern: /node1
+   defaults: { _controller: BBidsBBidsHomeBundle:Home:node1 }
+b_bids_b_bids_how_it_works:
+   pattern: /node2
+   defaults: { _controller: BBidsBBidsHomeBundle:Home:node2 }
+b_bids_b_bids_admin_add_category:
+   pattern: /admin/add/category
+   defaults: { _controller: BBidsBBidsHomeBundle:Admin:addcategory}
+b_bids_b_bids_forgot_password:
+   pattern: /forgotpassword
+   defaults: { _controller: BBidsBBidsHomeBundle:User:forgotpassword }
+b_bids_b_bids_admin_edit_category:
+   pattern: /admin/edit/category/{categoryid}
+   defaults : { _controller: BBidsBBidsHomeBundle:Admin:editcategory }
+b_bids_b_bids_admin_delete_category:
+   pattern: /admin/delete/category/{categoryid}
+   defaults: { _controller: BBidsBBidsHomeBundle:Admin:deletecategory }
+b_bids_b_bids_admin_edit_subcategory:
+   pattern: /admin/edit/subcategory/{categoryid}
+   defaults: { _controller: BBidsBBidsHomeBundle:Admin:editsubcategory }
+b_bids_b_bids_admin_edit_keyword:
+   pattern: /admin/edit/keyword/{keyid}
+   defaults: { _controller: BBidsBBidsHomeBundle:Admin:editkeyword }
+b_bids_b_bids_admin_delete_keyword:
+   pattern: /admin/delete/keyword/{keyid}
+   defaults: { _controller: BBidsBBidsHomeBundle:Admin:deletekeyword }
+b_bids_b_bids_user_authenticate:  
+   pattern: /user/authenticate/{email}/{enquiryid}
+   defaults: { _controller: BBidsBBidsHomeBundle:User:authenticate }
+b_bids_b_bids_user_email_activate:
+   pattern: /user/email/activate/{email}/{userid}
+   defaults: { _controller: BBidsBBidsHomeBundle:User:emailactivate }
+b_bids_b_bids_how_it_works_2:
+   pattern: /node3
+   defaults: { _controller: BBidsBBidsHomeBundle:Home:node3 }

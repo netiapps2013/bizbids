@@ -1,0 +1,15 @@
+BBids\BBidsHomeBundle\Entity\Sessioncategoriesrel:
+    type: entity
+    table: bbids_sessioncategoriesrel
+    id: 
+          id:
+              type: integer
+              length: '7'
+              generator: { strategy: AUTO }
+    fields: 
+          userid: 
+              type: integer
+              length: '7'
+          categoryid: 
+              length: '7'
+

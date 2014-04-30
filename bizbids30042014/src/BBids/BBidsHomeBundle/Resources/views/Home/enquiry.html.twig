@@ -1,0 +1,52 @@
+{% extends '::base.html.twig' %}
+
+{% block jquey %}
+
+{% endblock %}
+
+{% block banner %}
+
+{% endblock %}
+
+
+
+{% block maincontent %}
+<div class="container form-horizontal">
+	<h1>Post your Requirement</h1>
+	{% for flashMessage in app.session.flashbag.get('error') %}
+
+		<div class="alert alert-danger"{{ flashMessage }}</div>
+	
+	{% endfor %}
+
+	{% for flashMessage in app.session.flashbag.get('success') %}
+
+		<div class="alert alert-success">{{ flashMessage }}</div>
+	
+	{% endfor %}
+	{% for flashMessage in app.session.flashbag.get('message') %}
+
+	<div class="alert alert-success">{{ flashMessage }}</div>
+		
+	{% endfor %}
+	{{ form_start(form) }}
+	<div class="form_wrapper">
+	
+		<div> {{ form_errors(form) }} </div>
+		<div> {{ form_errors(form.category) }} </div>
+		<div> {{ form_errors(form.subj) }} </div>
+		<div> {{ form_errors(form.description) }} </div>
+		<div> {{ form_errors(form.city) }} </div>
+		
+		<div>
+			<div>{{ form_label(form.category) }}<span class="req">*</span>: </div> <div class="control"> {{ form_widget(form.category) }}</div>
+		
+			<div>{{ form_label(form.subcategory) }}<span  class="req">*</span>: </div> <div class="control">  {{ form_widget(form.subcategory) }}</div>
+			<div>{{ form_label(form.subj) }}<span class="req">*</span>: </div> <div class="control">  {{  form_widget(form.subj) }}</div>
+			<div>{{ form_label(form.description) }}<span class="req">*</span>: </div> <div class="control">  {{ form_widget(form.description) }}<p class="help-block">(maximum 300 characters)</p></div>
+			<div>{{ form_label(form.city) }}<span class="req">*</span>: </div> <div class="control">  {{ form_widget(form.city) }}</div>
+			{{ form_rest(form) }}
+		</div>
+	</div>
+	</div>
+{% endblock %}

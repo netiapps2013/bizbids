@@ -1,0 +1,306 @@
+{% extends '::vendor_dashboard.html.twig' %}
+
+
+
+{% block jquery %}
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script type="text/javascript">
+var checkcase = new Array();
+var checkarr = new Array();
+
+
+function secondlevel(obj,name,price){
+
+var ele = obj;
+var eleid = obj.id;
+var elevalue = obj.value;  
+
+		  if(eleid.indexOf("form_category_") >= 0){
+			if (obj.checked) { 
+						
+					loadjsajax(eleid,elevalue);
+					checkcategory();
+				
+				}else{
+				
+			
+				var child = document.getElementById("subcat"+elevalue);
+				var parent = document.getElementById("div"+eleid);
+				parent.removeChild(child);
+				checkcategory();
+
+			} 
+
+		}
+	
+}
+
+
+
+function loadjsajax(id,value)
+{
+var realpath = window.location.protocol + "//" + window.location.host + "/";
+var xmlhttp;
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+			
+			var newNode = document.createElement('div');  
+			newNode.id =  "subcat"+value;
+			newNode.setAttribute("class","subcategory");
+			newNode.innerHTML =xmlhttp.responseText;
+			document.getElementById('div'+id).appendChild(newNode);	
+			
+			
+    }
+  }
+xmlhttp.open("GET",realpath+"~anup/bizbids/pullcategoriesBySegmentstovendor.php?id="+value+"&mode=selectsubcat",true);
+xmlhttp.send();
+}
+
+function checkcategory(){
+var checkcase = new Array();
+var inputs = document.getElementsByTagName("input"); 
+for (var i = 0; i < inputs.length; i++) {  
+  if (inputs[i].type == "checkbox") {  
+		  if(inputs[i].id.indexOf("form_category_") >= 0){
+			if (inputs[i].checked) { 
+				checkcase[i]='yes';
+			}else{
+				checkcase[i]='no';
+			} 
+
+		}
+	}
+}
+
+	if(checkcase.indexOf('yes')<0){
+		document.getElementById('city').style.display="none";
+		document.getElementById('cityvalidate').style.display="block";
+		 
+	} else {
+		document.getElementById('city').style.display="block";
+		document.getElementById('cityvalidate').style.display="none";
+	}
+}
+
+
+function divtogg(id){
+		document.getElementById(id).style.display="none";
+	}
+	
+function categoryPA(checkseg){
+console.log(checkseg.indexOf('present'));
+if(checkseg.indexOf('present')<0){
+		
+		document.getElementById('categoryValidate').style.display="block";
+	
+	} else {
+		
+		document.getElementById('categoryValidate').style.display="none";
+	}
+}
+
+function getCookie(cname)
+{
+var name = cname + "=";
+var ca = document.cookie.split(';');
+for(var i=0; i<ca.length; i++) 
+  {
+  var c = ca[i].trim();
+  if (c.indexOf(name)==0) return c.substring(name.length,c.length);
+  }
+return "";
+}
+
+
+function checkcat_subcatonload(){
+var inputd = document.getElementsByTagName("input"); 
+for (var i = 0; i < inputd.length; i++) {  
+   if (inputd[i].type == "checkbox") {  
+		  if(inputd[i].id.indexOf("form_category_") >= 0){
+				var idd = inputd[i].id.split("form_category_");
+				
+				//alert(getCookie('category'+idd[1]));
+			if (getCookie('category'+idd[1])!="") { 
+				var zib = document.getElementById(inputd[i].id);
+				document.getElementById(inputd[i].id).checked=true;
+						secondlevel(zib,'sdfs','sdfsd');
+			}else{
+				
+			} 
+
+		}
+	}
+}
+
+}
+
+	
+</script>
+<script>
+$(document).ready(function(){
+$("input[type=checkbox]").click(function() {
+	var abc = $(this).attr("id");
+if(abc.indexOf("form_segment_") >= 0)
+{
+	
+$("#categoryValidate").css('display','none');
+$("input:checkbox").each(function(){
+    var $this = $(this);
+    if($(this).attr('id').indexOf('form_segment_')>=0 ){
+		
+		if($this.is(":checked")){
+		
+			var ax = $(this).val();
+			if($('#segcat'+ax).length==0){
+			$("#categorylist").css('display','block');
+			var realpath = window.location.protocol + "//" + window.location.host + "/";
+				$.ajax({url:realpath+"~anup/bizbids/pullcategoriesBySegmentstovendor.php?id="+ax+"&mode=selectcat", dataType : 'html',success:function(result){
+						$('#categorylist').append('<div id="segcat'+ax+'" class="segcat"></div>');
+						$("#segcat"+ax).html(result);
+							
+						}});
+			}
+			 
+			}else{
+			
+			
+				$("#categorylist").css('display','block');
+				var ax = $(this).val();
+				$("#segcat"+ax).remove();
+				 
+			} 
+		}
+ });
+ 	
+ 
+}
+});
+});
+
+$(document).ready(function(){
+
+$("input:checkbox").each(function(){
+    var $this = $(this);
+    if($(this).attr('id').indexOf('form_segment_')>=0 ){
+		
+		if($this.is(":checked")){
+		$("#categoryValidate").css('display','none');
+			var ax = $(this).val();
+			if($('#segcat'+ax).length==0){
+			$("#categorylist").css('display','block');
+				var realpath = window.location.protocol + "//" + window.location.host + "/";
+				$.ajax({url:realpath+"~anup/bizbids/pullcategoriesBySegmentstovendor.php?id="+ax+"&mode=selectcat", dataType : 'html',success:function(result){
+						$('#categorylist').append('<div id="segcat'+ax+'" class="segcat"></div>');
+						$("#segcat"+ax).html(result);
+							checkcat_subcatonload();
+						}});
+						
+			}
+			 
+			}else{
+			
+			
+				$("#categorylist").css('display','block');
+				var ax = $(this).val();
+				$("#segcat"+ax).remove();
+				 
+			} 
+		}
+ });
+
+});
+
+
+</script>
+
+{% endblock %}
+
+
+{% block customcss %}
+<style>
+
+
+
+.csszoozoo1{
+margin:5px;
+width:32%;
+float:left;
+margin-right:5px;
+}
+
+.subcat{
+background-color: #FFFFE0;
+}
+</style>
+{% endblock %}
+
+
+{% block pageblock %} 
+<div class="container"> 
+<div><h4>Purchase Lead Packs</h4></div>
+
+	{% for flashMessage in app.session.flashbag.get('error') %}
+
+	<div class="alert alert-danger">{{ flashMessage }}</div>
+		
+	{% endfor %}
+	
+	{% for flashMessage in app.session.flashbag.get('success') %}
+
+	<div class="alert alert-success">{{ flashMessage }}</div>
+		
+	{% endfor %}
+	
+	{% for flashMessage in app.session.flashbag.get('message') %}
+
+	<div class="alert alert-success">{{ flashMessage }}</div>
+		
+	{% endfor %}
+{{ form_start(form) }}
+
+<div id="segment" class="category-block"><h4>CHOOSE A SERVICE DOMAIN</h4>
+	<div class="category-content">
+			{% for child in form.segment %}
+				<div class="field-item">{{ form_widget(child) }} {{ form_label(child) }} </div>     
+			{% endfor %} 
+	</div>
+</div>
+<div class="category-block"><h4>CHOOSE YOUR BUSINESS OFFERING</h4> 
+<div class="category-content">
+		<p class = "message" id="categoryValidate">Please select the segement</p>
+		<div id="categorylist" style="width:100%; float:left;"></div>
+</div>
+</div>
+
+
+<div  class="category-block" ><h4>CHOOSE YOUR CITY</h4>
+<div class="category-content">
+<p class="message" id="cityvalidate" >Please select the category</p>
+	<div id="city">
+		{% for child in form.city %}
+			<div class="field-item">{{ form_widget(child) }} {{ form_label(child) }}</div>
+		{% endfor %} 
+	</div>
+</div>
+</div>
+
+<div> {{ form_widget(form.BuyLeads) }} </div>
+</div>
+<script>
+window.onload= divtogg('categorylist'),divtogg('city'),divtogg('hidediv');
+
+
+</script>
+{% endblock %}
+

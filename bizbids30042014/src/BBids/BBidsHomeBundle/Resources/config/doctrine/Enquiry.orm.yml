@@ -1,0 +1,36 @@
+BBids\BBidsHomeBundle\Entity\Enquiry:
+     type: entity
+     table: bbids_enquiry
+     id:
+          id: 
+               type: integer
+               length: '7'
+               generator: { strategy: AUTO }
+
+     fields:
+          subj: 
+               type: string
+          description:
+               type: text
+               nullable: true
+          city: 
+               type: string
+          category:
+               type: integer
+               length: '7'
+          authorid:
+               type: integer
+               length: '7'
+          created: 
+               type: datetime
+          updated: 
+               type: datetime
+               nullable: true
+          status:
+               type: integer
+               length: '7'
+          updatedby:
+               type: integer
+               nullable: TRUE
+                 
+

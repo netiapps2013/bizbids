@@ -1,0 +1,23 @@
+{% extends '::consumer_dashboard.html.twig' %}
+
+{% block pageblock %}
+<div class="container">
+<div class="page-title"><h1>My Enquiries</h1></div>
+<div>
+<table class="vendor-enquiries">
+<thead><tr><td>Subject</td><td>Description</td><td>City</td><td>Category</td><td>Created Date</td></tr></thead>
+
+	{% for enquiry in enquiries %}
+	<tr>
+<td>{{ enquiry.subj }} </td>
+<td>{{ enquiry.description|slice(0, 20) }} </td>
+<td>{{ enquiry.city }} </td>
+<td>{{ enquiry.category }} </td>		
+<td>{{ enquiry.created|date('Y-m-d h:i:s') }} </td>
+
+	</tr>
+	{% endfor %}
+	</table>
+</div>
+</div> 
+{% endblock %}               

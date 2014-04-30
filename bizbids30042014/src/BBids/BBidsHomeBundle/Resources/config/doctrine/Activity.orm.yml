@@ -1,0 +1,29 @@
+BBids\BBidsHomeBundle\Entity\Activity:
+    type: entity
+    table : bbids_activity
+    id: 
+        id:
+            type: integer
+            length: '7'
+            generator: { strategy:AUTO }
+    fields: 
+        message: 
+            type: string
+            length: '85'
+        category: 
+            type: string
+            length: '55'
+            nullable: true
+        city: 
+            type: string
+            length: '50'
+            nullable: TRUE
+        authorid: 
+            type: integer
+            length: '7'
+        created: 
+            type: datetime
+        type: 
+            type: integer
+            
+       

@@ -1,0 +1,49 @@
+.megamenu{
+position: absolute;
+display: none;
+left: 0;
+top: 0;
+background: white;
+border: 1px solid #1E7CC8;
+border-width: 5px 1px;
+padding: 10px;
+font-family: 'Open Sans',sans-serif;
+z-index: 100;
+font-size:13px;
+width:1136px;
+
+}
+
+.megamenu .column{
+float: left;
+width: 25%; /*width of each menu column*/
+}
+
+.megamenu .column ul{
+margin: 0;
+padding: 0;
+list-style-type: none;
+}
+
+.megamenu .column ul li{
+padding-bottom: 5px;
+line-height:16px;
+}
+
+.megamenu .column h3{
+background: #e0e0e0;
+margin: 0 0 5px 0;
+}
+
+.megamenu .column ul li a{
+text-decoration: none;
+color:#000 !important;
+}
+
+.megamenu .column ul li a:hover{
+	color: #EF702D !important;
+}
+
+#megamenu1 {
+    left: 102px !important;
+}

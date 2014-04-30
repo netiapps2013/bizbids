@@ -1,0 +1,227 @@
+{% extends '::vendor_dashboard.html.twig' %}
+
+{% block pageblock %}
+{# JavaScript/JQuery functions start #}
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+$("input[type=radio]").click(function(){
+	var abc = $(this).attr("id");
+	var idarr = abc.split("_");
+	
+  $("input:radio").each(function(){
+   	 var $this = $(this);
+	
+   	 if($this.attr('id').indexOf(idarr[0])>=0 ){
+		
+		if($this.attr('id')==abc){
+			$this.attr('checked','true');
+			
+			if(idarr[1]==1){
+				$('#summary-'+idarr[0]).html('Bronze package @ 0% savings');
+			}else if(idarr[1]==2){
+				$('#summary-'+idarr[0]).html('Silver package @ 5% savings');
+			}else if(idarr[1]==3){
+				$('#summary-'+idarr[0]).html('Gold package @ 10% savings');
+			}else if(idarr[1]==4){
+				$('#summary-'+idarr[0]).html('Platinum package @ 20% savings');
+			}
+		}else {
+			$this.removeAttr('checked');
+		}
+	}
+  });
+
+});
+
+
+});
+
+function getPrice(obj){
+
+
+var pack = obj.id.split("_");
+var packid = pack[1];
+var cat = pack[0].split('category');
+var categoryid = cat[1];
+var price = 0;
+
+$(document).ready(function(){
+var realpath = window.location.protocol + "//" + window.location.host + "/";
+						$.ajax({url:realpath+"~anup/bizbids/pullPackagePrice.php?categoryid="+categoryid , dataType : 'html',success:function(result){
+						if(packid==1){
+
+							 price = parseInt(result)*25;
+							 $('#listprice'+categoryid).html('= AED '+price);
+						
+						}else if(packid==2){
+							
+							price = ((parseInt(result)*50)-((5*parseInt(result)*50)/100));
+							$('#listprice'+categoryid).html(parseInt(result)*50 +'-5% DISCOUNT<br>= AED '+price+'<br> YOU SAVE AED '+(5*parseInt(result)*50)/100);
+						}else if(packid==3){
+							price = ((parseInt(result)*100)-((10*parseInt(result)*100)/100));
+							$('#listprice'+categoryid).html(parseInt(result)*100 +'-10% DISCOUNT<br>= AED '+price+'<br> YOU SAVE AED '+((10*parseInt(result)*100)/100));
+						}else if(packid==4) {
+							price = ((parseInt(result)*250)-((20*parseInt(result)*250)/100));
+							$('#listprice'+categoryid).html(parseInt(result)*250 +'-20% DISCOUNT<br>= AED '+price+'<br> YOU SAVE AED '+((20*parseInt(result)*250)/100));
+						}
+						
+							$('#summary-listprice'+categoryid).html('AED '+price);
+							$('#justprice'+categoryid).val(price);
+							getTotal();
+						}});
+
+});	
+}
+
+function getTotal(){
+	$(document).ready(function(){
+	var total = 0;
+	$("input[id^='justprice']").each(function(){
+		var id = $(this).attr('id');
+		var value = $(this).val();
+		
+
+			 total = parseFloat(total)+parseFloat(value);
+		
+	});
+
+	$('#grandtotal').html(total);
+	$('#GrandTotal').val(total);
+	});
+
+	
+}
+function deleteCookie(cookiename)
+    {
+        var d = new Date();
+        d.setDate(d.getDate() - 1);
+        var expires = ";expires="+d;
+        var name=cookiename;
+        //alert(name);
+        var value="";
+        document.cookie = name + "=" + value + expires + "; path=/acc/html";                    
+    }
+    
+function setcck(){
+var cookies = document.cookie.split(";");
+    for (var i = 0; i < cookies.length; i++)
+    {   
+        var spcook =  cookies[i].split("=");
+        if(spcook[0].indexOf('category')>=0){
+        deleteCookie(spcook[0]);
+        }
+    }
+    
+var date = new Date();
+ var minutes = 1;
+ date.setTime(date.getTime() + (minutes * 60 * 1000));
+ 
+{% for key , value in categoryArray %}
+document.cookie = "category{{ key }}= {{ key }}; expries="+date;
+{% endfor %}
+
+}
+</script>
+{# JavaScript/JQuery functions ends #}
+
+<div class="inner_container container">
+	<div class="packages-block">
+		<h1 class="page-title">Choose Your Packages</h1>
+		<div class="service-category-block">
+			<h4>SELECT FROM AVAILABLE PACKAGES</h4>
+		<form name="choosepack" method="post" action="../../../choosePackResult.php">
+			<table class="table table-bordered package">
+				<thead>
+					<tr>
+						<th>SERVICE CATEGORY</th>
+						<th class="featuresclass bronze"><h1>BRONZE</h1>
+						<ul> 
+						<li>Valid for 1 year</li>
+						<li>Unlimited SMS </li>
+						<li>You save 0%</li>
+						</ul>
+						<span> 25 VERFIED LEADS </span>
+						</th>
+						<th class="featuresclass silver"><h1>SILVER</h1><ul> 
+						<li>Valid for 1 year</li>
+						<li>Unlimited SMS </li>
+						<li>You save 5%</li></ul>
+						<span> 50 VERFIED LEADS </span>
+						</th>
+						<th class="featuresclass gold"><h1>GOLD</h1><ul> 
+						<li>Valid for 1 year</li>
+						<li>Unlimited SMS </li>
+						<li>You save 10%</li></ul>
+						<span> 100 VERFIED LEADS </span>
+						</th>
+						<th class="featuresclass platinum"><h1>PLATINUM</h1><ul> 
+						<li>Valid for 1 year</li>
+						<li>Unlimited SMS </li>
+						<li>You save 20%</li></ul>
+						<span> 250 VERFIED LEADS </span>
+						</th>
+						<th>PACKAGE COST (AED)</th>
+					</tr>
+				</thead>
+			<tbody>
+					<input type="hidden" name="uid" value="{{ uid  }}" >
+		{# category listing using for loop #}
+			{% for keys,value in categoryArray %}					
+					
+				<tr>
+					<td>{{ value }}<input type="hidden" name="categories[]" value="{{ keys }}" /> </td>
+
+					<td><input type="radio" name="category{{ keys }}" id="category{{ keys }}_1" onclick="getPrice(this);" value="1"></td>
+					<td><input type="radio" name="category{{ keys }}" id="category{{ keys }}_2" onclick="getPrice(this);" value="2"></td>
+					<td><input type="radio" name="category{{ keys }}" id="category{{ keys }}_3" onclick="getPrice(this);" value="3"></td>
+					<td><input type="radio" name="category{{ keys }}" id="category{{ keys }}_4" onclick="getPrice(this);" value="4"></td>
+					<td id="listprice{{ keys }}"></td>
+					<input type="hidden" name="justprice{{ keys }}" id="justprice{{ keys }}" value="0">
+				</tr>
+						
+			{% endfor %}
+		{# category listing ends #}
+			</tbody>
+			</table>
+		</div>
+		
+		
+		<div class="service-category-block">
+			<h4>TOTAL SUMMARY</h4>
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th>Service Category</th>
+						<th>Package</th>
+						<th>Cost</th>
+						
+					</tr>
+				</thead>
+			<tbody>
+			{# summary listing #}
+			{% for keys,value in categoryArray %}	
+				<tr>
+					<td>{{ value }}</td>
+					<td id="summary-category{{ keys }}">Choose your pack</td>
+					<td id="summary-listprice{{ keys }}"></td>
+					
+				</tr>
+				
+			{% endfor %}
+			{# summary listing ends #}
+			</tbody>
+			</table>
+		</div>
+		<div>
+			<h2>Total Amount - <span id="grandtotal"></span> AED <input type="hidden" name="GrandTotal" id="GrandTotal"></h2>
+			<button type="submit" id="submit" class="btn btn-primary">Processed to Payment</button> <a href="Javascript:window.history.back();"  onclick="setcck();" class="btn btn-primary">Back</a>
+	</form>
+		</div>
+		
+		
+		
+	</div>
+</div>
+{% endblock %}
+

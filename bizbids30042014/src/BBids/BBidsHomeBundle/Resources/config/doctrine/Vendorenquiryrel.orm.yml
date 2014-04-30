@@ -1,0 +1,22 @@
+BBids\BBidsHomeBundle\Entity\Vendorenquiryrel:
+    type: entity
+    table: bbids_vendorenquiryrel
+    id: 
+        id:  
+            type: integer
+            generator: { strategy: AUTO }
+    fields: 
+        enquiryid: 
+            type: integer
+            length: '7'
+        vendorid: 
+            type: integer
+            length: '7'
+        acceptstatus:
+            type: integer
+            length: '2'
+            nullable: TRUE
+        leadstatus:
+            type: integer
+            length: '2'
+            nullable: TRUE

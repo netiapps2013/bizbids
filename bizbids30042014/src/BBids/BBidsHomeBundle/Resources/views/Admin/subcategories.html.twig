@@ -1,0 +1,61 @@
+{% extends '::base_admin.html.twig' %}
+
+{% block content %}
+<script type="text/javascript">
+
+ function deletefunc(subid, subcatname){
+	var con = confirm("Are you sure to delete  "+subcatname+ "? The record once deleted cannot be retrived back!");
+	if(con){
+		var url = "{{ path('b_bids_b_bids_admin_delete_category', {'categoryid' : "SUBCATID"}) }}";
+		var urlset = url.replace('SUBCATID', subid);
+		
+			window.open(urlset,"_self");
+		return true;
+	}else{
+		return false;
+	}
+ }
+</script>
+<div class="inner_container container">
+<div class=""><h3>Sub Category List <span class="pull-right"><a class="btn btn-warning" href="javascript:window.history.go(-1)">Back</a> <a  class="btn btn-success" href="{{ path('b_bids_b_bids_admin_add_subcategory', {'categoryid' : categoryid}) }}">Add Sub Category</a></span></h3> </div>
+	<div class="segment-content row">
+	{% for flashMessage in app.session.flashbag.get('error') %}
+
+	<div class="alert alert-danger">{{ flashMessage }}</div>
+		
+	{% endfor %}
+	
+	{% for flashMessage in app.session.flashbag.get('success') %}
+
+	<div class="alert alert-success">{{ flashMessage }}</div>
+		
+	{% endfor %}
+	{% for flashMessage in app.session.flashbag.get('message') %}
+
+	<div class="alert alert-success">{{ flashMessage }}</div>
+		
+	{% endfor %}
+	<table class="table table-bordered">
+        <thead>
+         <tr>
+            <th>Sub Category</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>	
+	{% for sub in subcategories %}
+	<tr>
+		<td>{{ sub.category }}</td>
+		<td>{% if sub.status== 1 %} Active {% else %} Inactive {% endif %}</td>
+		<td>
+			<a href="{{ path('b_bids_b_bids_admin_edit_subcategory', {'categoryid' : sub.id}) }}" class="btn btn-warning"> Edit</a>
+			<a href="#" onclick="deletefunc('{{ sub.id }}', '{{ sub.category }}')" class="btn btn-danger"> Delete</a>
+		</td>
+	</tr>
+	{% endfor %}
+	</tbody>
+	</table>
+</div>
+</div> 	
+{% endblock %}

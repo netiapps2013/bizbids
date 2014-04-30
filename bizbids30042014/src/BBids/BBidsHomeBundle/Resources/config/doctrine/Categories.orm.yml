@@ -1,0 +1,37 @@
+BBids\BBidsHomeBundle\Entity\Categories:
+    type: entity
+    table: bbids_categories
+    id: 
+        id: 
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        segmentid: 
+            type: integer 
+            length: '7'
+        parentid: 
+            type: integer
+            length: 7
+        category:
+            type: string
+            length: 60
+            unique: TRUE
+        suite:
+           type: string
+           length: 30
+           nullable: TRUE
+        price: 
+           type: decimal
+           precision: 6
+           scale: 4
+        status: 
+           type: integer
+           length: 2
+        description:
+           type: text
+           
+     
+
+
+
+

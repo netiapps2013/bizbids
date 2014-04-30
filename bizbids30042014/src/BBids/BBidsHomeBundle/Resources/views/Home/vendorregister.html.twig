@@ -1,0 +1,58 @@
+{% extends '::base.html.twig' %}
+
+{% block banner %}
+
+{% endblock %}
+
+{% block maincontent %}
+<div class="container form-horizontal">
+	<h1>Vendor Registration</h1>
+<div  class="form_wrapper">	
+	{% for flashMessage in app.session.flashbag.get('error') %}
+
+			<div class="alert alert-danger">{{ flashMessage }}</div> 
+	
+	{% endfor %}
+
+	{% for flashMessage in app.session.flashbag.get('success') %}
+
+		<div class="alert alert-success">{{ flashMessage }}</div>	
+	
+	{% endfor %}
+	
+	{% for flashMessage in app.session.flashbag.get('message') %}
+
+	<div class="alert alert-success">{{ flashMessage }}</div>
+		
+	{% endfor %}
+	{{ form_start(form) }}
+	  {{ form_errors(form) }}
+	  
+ <div>
+    <div>   {{ form_errors(form.email) }} </div>
+	<div>	{{ form_errors(form.smsphone) }} </div>
+	<div>	{{ form_errors(form.homecode) }} </div>
+	<div>	{{ form_errors(form.homephone) }} </div>
+	<div>   {{ form_errors(form.address) }} </div>
+	<div>	{{ form_errors(form.bizname) }} </div>
+	<div>	{{ form_errors(form.contactname) }} </div>
+	<div>	{{ form_errors(form.faxcode) }} </div>
+	<div>	{{ form_errors(form.faxphone) }} </div>
+</div>
+<div>
+		<div class="control-group">{{ form_label(form.email) }}<span class="req">*</span><b class="req" id="emailexists"></b> : </div><div class="control"> {{ form_widget(form.email) }}</div>
+		<div class="control-group">{{ form_label(form.smsphone) }}<span class="req">*</span> : </div><div class="control"> {{ form_widget(form.smsphone) }}</div>
+		<div class="control-group">{{ form_label(form.homecode) }} : </div> 
+		<div class="form-inline  control"> 
+		<div class="form-group area-code">{{ form_widget(form.homecode) }} </div> <div class="form-group phone-no"> {{ form_widget(form.homephone) }}</div></div>
+		<div class="control-group">{{ form_label(form.address) }}<span class="req">*</span> : </div><div class="control"> {{ form_widget(form.address) }}</div>
+		<div class="control-group">{{ form_label(form.bizname) }}<span class="req">*</span> : </div><div class="control"> {{ form_widget(form.bizname) }}</div>
+		<div class="control-group">{{ form_label(form.contactname) }}<span class="req">*</span> : </div><div class="control"> {{ form_widget(form.contactname) }}</div>
+		<div class="control-group">{{ form_label(form.faxcode) }} : </div>
+		<div class="form-inline  control"> 
+		<div class="form-group area-code">{{ form_widget(form.faxcode) }} </div> <div class="form-group phone-no"> {{ form_widget(form.faxphone) }}</div></div>
+		<div class="control-group">{{ form_rest(form) }} </div> 
+
+</div>
+</div></div>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends '::base_admin.html.twig' %}
+
+{% block content %}
+<div class="container">
+<div class="page-title"><h1>Add Keyword</h1></div>
+<div class="edit-user-block">
+<div class="form_wrapper col-md-6">
+		{% for flashMessage in app.session.flashbag.get('error') %}
+
+	<div class="alert alert-danger">{{ flashMessage }}</div>
+		
+	{% endfor %}
+	
+	{% for flashMessage in app.session.flashbag.get('success') %}
+
+	<div class="alert alert-success">{{ flashMessage }}</div>
+		
+	{% endfor %}
+	{% for flashMessage in app.session.flashbag.get('message') %}
+
+	<div class="alert alert-success">{{ flashMessage }}</div>
+		
+	{% endfor %}	
+
+
+	{{ form_start(form) }}
+		{{ form_errors(form) }}
+<div>
+    <div>   {{ form_errors(form.category) }} </div>
+	<div>	{{ form_errors(form.keyword) }} </div>
+</div>
+<div>
+		<div class="control-group">{{ form_label(form.category) }} : </div><div class="control"> {{ form_widget(form.category) }}</div>
+		<div class="control-group">{{ form_label(form.keyword) }}<span class="req">*</span> : </div><div class="control"> {{ form_widget(form.keyword) }}</div>
+		<div class="control-group"><div class="sameline">{{ form_rest(form) }}</div>
+		<div class="sameline"> <a class="btn btn-warning" href="javascript:window.history.go(-1)">Cancel</a> </div></div>
+
+</div>
+</div>
+</div>
+</div>	
+{% endblock %}

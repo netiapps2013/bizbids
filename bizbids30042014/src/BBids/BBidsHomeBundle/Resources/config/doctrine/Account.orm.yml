@@ -1,0 +1,38 @@
+BBids\BBidsHomeBundle\Entity\Account:
+    type: entity
+    table: bbids_account
+    id: 
+        id:
+            type: integer
+            length: '7'
+            generator: { strategy: AUTO }
+    fields: 
+        userid:
+            type: integer
+            length: '7'
+        profileid:
+            type: integer
+            length: '7'
+        smsphone: 
+            type: integer
+            length: '12'
+        homephone: 
+            type: string
+            length: '14'
+        bizname: 
+            type: string
+            length: '40'
+            nullable: true
+        contactname:
+            type: string
+            length: '45'
+            nullable: true
+        address: 
+            type: text
+            nullable: true
+        fax:
+            type: string
+            length: '14'
+            nullable: true
+        
+

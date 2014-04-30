@@ -1,0 +1,22 @@
+{% extends '::base_admin.html.twig' %}
+
+{% block content %}
+<div class="container"> 
+<div class="page-title"><h1>Enquiry Information</h1></div>
+<table class="col-sm-6 vendor-user gray-bg" width="100%">
+	{% for enquiry in enquiries %}
+	<tr><td width="30%">Subject</td><td width="70%">: {{ enquiry.subj }} </td></tr>
+	<tr><td>Description</td><td>:	{{ enquiry.description }} </td></tr>
+	<tr><td>City</td><td>:	{{ enquiry.city }} </td></tr>
+	<tr><td>Created Date</td><td>:	{{ enquiry.created|date('Y-m-d h:i:s') }}	</td></tr>
+	<tr><td>Updated Date</td><td>:	{{ enquiry.updated|date('Y-m-d h:i:s') }} </td></tr>
+	<tr><td>Status</td><td>:	{% if enquiry.status == 1 %} Active {% elseif enquiry.status == 2 %} Inactive {% elseif enquiry.status == 3 %} Blocked {% endif %}</td></tr>
+	<tr><td>Category</td><td>: {{ category }} </td></tr>
+	<tr><td>Email</td><td>: {{ email }} </td></tr>
+	<tr><td>Mapped vendors</td><td>: <a href="{{ path('b_bids_b_bids_admin_mapped_vendors', {'enquiryid' : enquiry.id }) }}" > View mapped Vendors </a> </td></tr>
+	<tr><td>Vendor Response</td><td>: <a href="{{ path('b_bids_b_bids_admin_vendor_response', {'enquiryid' : enquiry.id }) }}"> View Vendor Response </a> </td></tr>
+	{% endfor %} 
+</div>
+</table>
+</div>
+{% endblock %}

@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<head>
+<title>Business BID</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+{% block stylesheets %}
+       <link type="text/css" rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
+	<link type="text/css" rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+	<link type="text/css" rel="stylesheet" href="{{ asset('css/style.css') }}">
+	<link type="text/css" rel="stylesheet" href="{{ asset('css/layout.css') }}">
+	<link type="text/css" rel="stylesheet" href="{{ asset('css/jkmegamenu.css') }}">
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:600,400,700' rel='stylesheet' type='text/css'>
+	
+{% endblock %}
+ 
+{% block customcss %}
+
+{% endblock %}
+
+{% block javascripts %}
+	<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+	<script src="{{ asset('js/bootstrap.js') }}"></script>
+	<script src="{{ asset('js/bootstrap.min.js') }}"></script>
+	<script src="{{ asset('js/jkmegamenu.js') }}"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
+
+
+	<script>
+	$(document).ready(function(){	
+		
+		var realpath = window.location.protocol + "//" + window.location.host + "/";
+	$('#category').autocomplete({
+		      	source: function( request, response ) {
+		      		$.ajax({
+		      			url : realpath+"~anup/bizbids/ajax-info.php",
+		      			dataType: "json",
+						data: {
+						   name_startsWith: request.term,
+						   type: 'category'
+						},
+						 success: function( data ) {
+							 response( $.map( data, function( item ) {
+								return {
+									label: item,
+									value: item
+								}
+							}));
+						}
+		      		});
+		      	},
+		      	autoFocus: true,
+		      	minLength: 2      	
+		      });
+
+});
+	$(document).ready(function(){
+		var realpath = window.location.protocol + "//" + window.location.host + "/";
+	$("#form_subcategory").html('<option value="0">Select</option>');
+		$("#form_category").on('change',function (){
+		var ax = 	$("#form_category").val();
+	
+			$.ajax({url:realpath+"~anup/bizbids/pullSubCategoryByCategory.php?categoryid="+ax,success:function(result){
+				
+				$("#form_subcategory").html(result);
+				}});
+		});
+		
+});
+
+	$(document).ready(function(){
+				var realpath = window.location.protocol + "//" + window.location.host + "/";
+		$("#form_email").on('input',function (){
+		var ax = 	$("#form_email").val();
+			if(ax==''){
+				$("#emailexists").text('');
+			}
+			if(ax.indexOf('@') > -1 ) {
+				
+			$.ajax({url:realpath+"~anup/bizbids/checkEmail.php?emailid="+ax,success:function(result){
+				
+				if(result == "exists") {
+					$("#emailexists").text('Email address already exists!');
+				} else {
+					$("#emailexists").text('');
+				}
+				}});
+			}
+		});
+		
+});
+
+	$(document).ready(function(){
+		$('#form_description').attr("maxlength","300");
+		
+	});
+
+</script>
+	<script type='text/javascript' >
+		
+	function jsfunction(){
+		
+			
+			var realpath = window.location.protocol + "//" + window.location.host + "/";
+				var xmlhttp;
+				if (window.XMLHttpRequest)
+				  {// code for IE7+, Firefox, Chrome, Opera, Safari
+				  xmlhttp=new XMLHttpRequest();
+				  }
+				else
+				  {// code for IE6, IE5
+				  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+				  }
+				xmlhttp.onreadystatechange=function()
+				  {
+				  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+					{
+							//alert(xmlhttp.responseText);
+						document.getElementById("searchval").innerHTML=xmlhttp.responseText;
+						megamenublogAjax();
+						megamenubycatAjax();
+					}
+				  }
+				xmlhttp.open("GET",realpath+"~anup/bizbids/ajax-info.php",true);
+				xmlhttp.send();
+
+				
+			
+		}
+		function megamenublogAjax(){
+
+			
+			var realpath = window.location.protocol + "//" + window.location.host + "/";
+				var xmlhttp;
+				if (window.XMLHttpRequest)
+				  {// code for IE7+, Firefox, Chrome, Opera, Safari
+				  xmlhttp=new XMLHttpRequest();
+				  }
+				else
+				  {// code for IE6, IE5
+				  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+				  }
+				xmlhttp.onreadystatechange=function()
+				  {
+				  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+					{
+							//alert(xmlhttp.responseText);
+						document.getElementById("megamenu1").innerHTML=xmlhttp.responseText;
+					}
+				  }
+				xmlhttp.open("GET",realpath+"~anup/bizbids/mega-menublog.php",true);
+				xmlhttp.send();
+
+				
+			
+		}
+	function megamenubycatAjax(){
+
+			
+			var realpath = window.location.protocol + "//" + window.location.host + "/";
+				var xmlhttp;
+				if (window.XMLHttpRequest)
+				  {// code for IE7+, Firefox, Chrome, Opera, Safari
+				  xmlhttp=new XMLHttpRequest();
+				  }
+				else
+				  {// code for IE6, IE5
+				  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+				  }
+				xmlhttp.onreadystatechange=function()
+				  {
+				  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+					{
+							//alert(xmlhttp.responseText);
+						document.getElementById("megamenubycat").innerHTML=xmlhttp.responseText;
+					}
+				  }
+				xmlhttp.open("GET",realpath+"~anup/bizbids/mega-menubycat.php",true);
+				xmlhttp.send();
+
+				
+			
+		}
+</script>
+
+{% endblock %}
+
+{% block customjs %}
+
+{% endblock %}
+
+{% block jquery %}
+
+{% endblock %}
+</head>
+<body>
+
+{% set uid = app.session.get('uid') %}
+{% set pid = app.session.get('pid') %}
+{% set email = app.session.get('email') %}
+{% set name = app.session.get('name') %}
+
+{% if uid is not null %}
+
+
+<div class="welcome-message"><div class="container">Welcome, {{ name }} (<a href="{{ path('b_bids_b_bids_logout') }}">Logout</a>)</div>
+
+
+</div>
+
+{% endif %}
+<div class="main_container">
+	<!-- top header Starts -->
+	<div class="header container">
+    	<div class="row">
+            <div class="col-md-4 left_nav">
+		{% block topleftmenu %}
+            	<nav class="top_menu">
+                	<ul class="nav navbar-nav">
+                    	<li><a href="{{ path('b_bids_b_bids_home_homepage')}}">HOME</a></li>
+                        <li><a href="#">VENDOR SEARCH</a></li>
+                        <li><a href="#">VENDOR REVIEWS</a></li>
+                        <li><a href="http://192.168.1.10/~anup/resource_centre" id="megaanchor">RESOURCE CENTRE</a></li>         
+                    </ul>
+                </nav>
+                <script type="text/javascript">jkmegamenu.definemenu("megaanchor", "megamenu1", "mouseover"); </script>
+                <script type="text/javascript">jkmegamenu.definemenu("megaanchorbycat", "megamenubycat", "mouseover"); </script>
+
+		{% endblock %}
+            </div>
+            <div class="col-md-3 logo"><img src="{{ asset('img/logo.jpg') }}"></div>
+            <div class="col-md-5 right_nav">
+		{% block toprightmenu %}
+            	<nav class="top_menu">
+                	<ul class="nav navbar-nav">
+                    	<li><a href="{{ path('b_bids_b_bids_how_it_works_2') }}">How it Works?</a></li>
+                        <li><a href="#">Write a Review</a></li>
+				{% if uid is empty %}
+                        		<li><a href="{{ path('b_bids_b_bids_login') }}" > Login </a></li>   
+				{% else %}
+						{% if pid == 1 %}
+							<li><a href="{{ path('b_bids_b_bids_admin_home') }}"> Dashboard </a></li>
+
+
+						{% else %}
+							<li><a href="{{ path('b_bids_b_bids_home') }}"> Dashboard </a></li>
+							
+						{% endif %}
+				{% endif %}
+				{% if uid is null %}
+                        <li class="fb"><a href="#"><img src="{{ asset('img/fb.png') }}"></a></li>  
+                 {% endif %}  
+                  </ul>
+                </nav>
+		{% endblock %}
+            </div>
+        </div>
+    </div>
+    <!-- top header Ends -->
+    <!-- Search block Starts -->
+    <div class="search_block">
+	{% block search %}
+    	<div class="container">
+        	<div class="row">
+				<form name="search" method="request" action="{{ path('b_bids_b_bids_home_search') }}">
+					
+            	 <div class="col-md-7"><input class="form-control" type="text" list="browsers" placeholder="Category" id='category' name='category' ><datalist id="searchval"></datalist></div>
+                <!-- <div class="col-md-4"><input class="form-control" type="text" placeholder="City" id='city' name='city'></div>-->
+                 <div class="col-md-2 form-btn"><input type="submit"  class="btn btn-success btn-block" value="SEARCH"></div>
+                 <div class="col-md-3"><button class="btn btn-success btn-block" type="button"  id="megaanchorbycat">SEARCH  BY CATEGORY</button></div>
+                 </form>
+            </div>
+	    </div>
+	   
+	    {% endblock %}
+	    
+    </div>
+   	<!-- Search block Ends -->
+    <!-- Banner block Starts -->
+    {% block banner %}
+
+    <div class="jumbotron">
+    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+              <!-- Indicators -->
+              <ol class="carousel-indicators">
+                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                
+              </ol>
+            
+              <!-- Wrapper for slides -->
+              <div class="carousel-inner">
+                <div class="item active">
+                  <img src="{{ asset('img/banner1.jpg') }}" alt="...">
+                </div>
+                <div class="item">
+                  <img src="{{ asset('img/banner2.jpg') }}" alt="...">
+                </div>
+				
+               
+             
+              </div>
+            
+             
+            </div>
+			
+			<div class="category-right-block">
+		<div class="row">
+			{{ form_start(form) }}
+				<div class="form-group">
+				{{ form_label(form.category) }}
+				{{ form_widget(form.category) }}
+				</div>
+				<div class="form-group">
+				{{ form_label(form.city) }} 
+				{{ form_widget(form.city) }}
+				</div>
+				<div class="form-group">
+					{{ form_rest(form) }}
+				</div>
+			
+			{{ form_end(form) }}
+		</div>
+		
+	</div>
+
+    </div>
+    {% endblock %}
+    <!-- Banner block Ends -->
+	
+	
+    <!-- content block Starts -->
+    {% block maincontent %}
+    <div class="main_content">
+    	<div class="container">
+        	<div class="row">
+		{% block recentactivity %}
+            	<div class="col-md-7">
+		
+                <h1>Recent Activity</h1>
+                	<div class="recent_block">
+             {% for activity in activities %}
+				<div class="activities-block">
+			<div class="act-date">{{ activity.created|date('d-m-Y h:i') }}</div>
+			
+			{% if activity.type == 1%}
+				<span><strong>{{ activity.contactname }}</strong> from {{ activity.city }}, posted a new job against <a href="{{ path('b_bids_b_bids_home_homepage') }}search?category={{ activity.category }}">{{ activity.category }}</a></span>
+			{% else %}	
+				<span><strong>{{ activity.contactname }}</strong> from {{ activity.city }}, written a new review on <a href="{{ path('b_bids_b_bids_home_homepage') }}search?category={{ activity.category }}">{{ activity.category }}</a></span>
+			{% endif %}
+				</div>
+			{% endfor %}
+			         </div>
+                </div>
+		{% endblock %}
+		{% block livefeed %}
+                <div class="col-md-5">
+                <h1>How it Works</h1>
+                	<div class="feed_block_container">
+                    	<iframe width="100%" title="YouTube video player" src="http://www.youtube.com/embed/7qxGW9Ne5gA?HD=1;rel=0;showinfo=0;controls=0" height="258" frameborder="0"></iframe>
+                    </div>
+                
+                </div>
+		{% endblock %}
+            </div>
+
+            <div class="row review_block">
+            	<div class="col-md-12 review pull-left">
+				{% block requestsfeed %}
+           			<div class="col-md-3 request">
+                    	<h1>{{ enquiries }}</h1>
+                       <span>Number of New requests Updated</span>
+                    </div>
+				{% endblock %}
+				{% block latestreviews %}
+                    <div class="col-md-2 l_review">
+                    	<h2>LATEST REVIEWS</h2>
+                        <a href="#">See more reviews</a>
+                    </div>
+				{% endblock %}
+				{% block review %}
+                    <div class="col-md-7 review_list">
+                    	<h3>Repair an Asphalt Shingle Roof by Russell's Roofing</h3>
+                        <a href="#">1/28/2014</a>
+                        <p>"Elance has helped us achieve things I never knew possible, even in my metropolitan city. Rather 
+than staffing up with employees, we hire specialists for projects such as research, programming, 
+web design & development, research, programming," </p>
+                    </div>
+				{% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="testimonials_block">
+    	<div class="container">
+		{% block testimonial %}
+        	<div class="col-md-3">
+            	<h1>what our customers are saying</h1>
+            </div>
+            <div class="col-md-9"><h3>Repair an Asphalt Shingle Roof by Russell's Roofing</h3>
+                        <a href="#">1/28/2014</a>
+                        <p>"Elance has helped us achieve things I never knew possible, even in my metropolitan city. Rather 
+than staffing up with employees, we hire specialists for projects such as research, programming, 
+web design & development, research, programming," </p></div>
+        </div>
+		{% endblock %}
+    </div>
+		{% endblock %}
+    <!-- content block Ends -->
+    
+    <!-- mega menu div block starts -->
+		{% block megamenu %}
+		<div id="megamenu1" class="megamenu" ></div>
+		<div id="megamenubycat" class="megamenu"></div>
+		{% endblock %}
+    <!-- mega menu div block ends -->
+    
+    <!-- footer block Starts -->
+	{% block footer %}
+    <footer class="footer_wrapper">
+    <div class="container">
+        <div class="row">
+                              <div class=" col-sm-2">
+                      <div class="region region-footer-links-one">
+    <section id="block-menu-menu-footer-menu-one" class="block block-menu clearfix">
+
+        <h2 class="block-title">About</h2>
+    
+  <ul class="menu nav"><li class="first leaf"><a href="#" title="">About Us</a></li>
+<li class="leaf active"><a href="#" title="" class="active">Career Oprtunities</a></li>
+<li class="leaf active"><a href="#" title="" class="active">Contact Us</a></li>
+<li class="leaf active"><a href="#" title="" class="active">Live Support</a></li>
+<li class="leaf active"><a href="#" title="" class="active">Meet the Team</a></li>
+<li class="last leaf active"><a href="#" title="" class="active">Partners</a></li>
+</ul>
+</section> <!-- /.block -->
+  </div>
+                  </div>
+                                          <div class=" col-sm-2">
+                      <div class="region region-footer-links-two">
+    <section id="block-menu-menu-footer-menu-two" class="block block-menu clearfix">
+
+        <h2 class="block-title">Client Services</h2>
+    
+  <ul class="menu nav"><li class="first leaf"><a href="{{ path('b_bids_b_bids_post_job') }}" title="">Post a Job</a></li>
+<li class="leaf"><a href="#" title="">Vendors Reviews</a></li>
+<li class="last leaf"><a href="#" title="">Write A Review</a></li>
+</ul>
+</section> <!-- /.block -->
+  </div>
+                  </div>
+                                          <div class=" col-sm-2">
+                      <div class="region region-footer-links-three">
+    <section id="block-menu-menu-client-resources" class="block block-menu clearfix">
+
+        <h2 class="block-title">Client Resources</h2>
+    
+  <ul class="menu nav"><li class="first leaf"><a href="{{ path('b_bids_b_bids_vendor_register') }}" title="">Become a Vendor</a></li>
+    <ul class="menu nav"><li class="first leaf"><a href="{{ path('b_bids_b_bids_consumer_register') }}" title="">Become a Consumer</a></li>
+<li class="leaf active"><a href="#" title="" class="active">Refer a Company</a></li>
+<li class="last leaf active"><a href="http://192.168.1.10/~anup/resource_centre" title="" class="active">Resource Center</a></li>
+</ul>
+</section> <!-- /.block -->
+  </div>
+                  </div>
+                                          <div class=" col-sm-3">
+                      <div class="region region-footer-links-four">
+    <section id="block-menu-menu-for-services-professionals" class="block block-menu clearfix">
+
+        <h2 class="block-title">For Services Professionals</h2>
+    
+  <ul class="menu nav"><li class="first leaf active"><a href="{{ path('b_bids_b_bids_grow_your_business') }}" title="" class="active">Grow Your Business</a></li>
+<li class="leaf"><a href="#" title="">Join Our Networks</a></li>
+<li class="leaf"><a href="{{ path('b_bids_b_bids_login') }}" title="">Login</a></li>
+<li class="last leaf"><a href="#" title="">Service Professional Leads</a></li>
+</ul>
+</section> <!-- /.block -->
+  </div>
+                  </div>
+                        
+                            <div class="col-xs-12 col-sm-3 footer_nav_liks">
+                      <div class="region region-footer-links-five">
+    <section id="block-block-8" class="block block-block clearfix">
+
+      
+  <h4>1300 558 067</h4>
+
+<a href="{{ path('b_bids_b_bids_post_job') }}" class="btn btn-success btn-block">Get a Quotes</a>
+<a href="{{ path('b_bids_b_bids_grow_your_business') }}" class="btn btn-success btn-block">Grow your Business</a>
+
+</section> <!-- /.block -->
+  </div>
+ 
+                </div>
+                    </div>
+    </div>
+	<a href="#" class="live"></a>
+</footer>
+<footer class="footer_quick_links_wrapper">
+    <div class="container">
+        <div class="row">
+                              <div class=" col-sm-12">
+                      <div class="region region-footer-quick-links">
+    <section id="block-menu-menu-footer-quick-links" class="block block-menu clearfix">
+
+      
+  <ul class="menu nav"><li class="first leaf"><a href="#" title="">Feedback</a></li>
+<li class="leaf active"><a href="#" title="" class="active">Careers</a></li>
+<li class="leaf active"><a href="#" title="" class="active">Disclaimer</a></li>
+<li class="leaf"><a href="#" title="">Privacy policy</a></li>
+<li class="leaf active"><a href="#" title="" class="active">Sit Map</a></li>
+<li class="last leaf"><a href="#" title="">Terms of Use</a></li>
+</ul>
+</section> <!-- /.block -->
+  </div>
+                  </div>
+                    </div>
+    </div>
+</footer>
+<footer class="footer_bottom_links">
+    <div class="container">
+        <div class="row">
+                              <div class=" col-sm-6">
+                      <div class="region region-footer-messages">
+    <section id="block-block-5" class="block block-block clearfix">
+
+      
+  All Rights Reserved. Copyright 2014
+</section> <!-- /.block -->
+  </div>
+                  </div>
+                                          <div class=" col-sm-6">
+                      <div class="region region-footer-social-links">
+    <section id="block-block-6" class="block block-block clearfix">
+
+      
+  <div class="follow_us">
+<p>Follow Us</p>
+<a href="#" class="gplus" target="_blank"></a>
+<a href="#" class="pinterest" target="_blank"></a>
+<a href="#" class="twitter" target="_blank"></a>
+<a href="#" class="linkedin" target="_blank"></a>
+<a href="#" class="facebook" target="_blank"></a>
+</div>
+</section> <!-- /.block -->
+  </div>
+                  </div>
+                    </div>
+    </div>
+</footer> 
+	{% endblock %}
+    <!-- footer block ends -->
+</div>
+</body>
+</html>
+<script type="text/javascript">
+window.onload = jsfunction();
+//window.onload = getcharactercount();
+//window.onload = megamenuAjax();
+</script>

@@ -1,0 +1,14 @@
+{% extends '::consumer_dashboard.html.twig' %}
+
+{% block pageblock %}
+
+	{% for enquiry in enquiries %} 
+		{{ enquiry.subj }}
+                {{ enquiry.description }}
+                {{ enquiry.city }}
+                {{ enquiry.category }}
+                {{ enquiry.created }}
+                {{ enquiry.id }}
+	{% endfor %}
+
+{% endblock %}
